@@ -1,11 +1,16 @@
 import { axiosInstance } from "./";
-import { TextMemo } from "../types";
+
+import { Memo } from "../types";
 
 const getMemoSearchedList = async (keyword?: string) => {
-  const response = await axiosInstance.get<TextMemo[]>(
-    `/memo?keyword=${keyword}`
-  );
+  const response = await axiosInstance.get<Memo[]>(`/memo?keyword=${keyword}`);
   return response.data;
 };
 
-export { getMemoSearchedList };
+const getMemoList = async () => {
+  const response = await axiosInstance.get<Memo[]>("/src/data/memoList.json");
+
+  return response.data;
+};
+
+export { getMemoList, getMemoSearchedList };
