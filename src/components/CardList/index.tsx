@@ -3,7 +3,7 @@ import CardWrapper from "../CardWrapper";
 import { Memo } from "../../types";
 import { useState } from "react";
 import SelectedContentModal from "../SelectedContent/SelectedContentModal";
-import { ModalPortal } from "../SelectedContent/ModalPortal";
+import { ModalPortal } from "../ModalPortal/ModalPortal";
 
 interface CardListProps {
   cardList: Memo[] | undefined;

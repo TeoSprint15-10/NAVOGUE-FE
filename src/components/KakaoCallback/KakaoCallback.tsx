@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Rest_api_key, redirect_uri } from "../KakaoLogin/kakaoLoginData";
 import axios from "axios";
 
 const KakaoCallback = () => {
@@ -7,6 +6,8 @@ const KakaoCallback = () => {
     const params = new URL(document.location.toString()).searchParams;
     const code = params.get("code");
     const grant_type = "authorization_code";
+    const Rest_api_key = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
+    const redirect_uri = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
 
     axios
       .post(
