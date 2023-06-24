@@ -1,5 +1,5 @@
-import React from "react";
-import { S } from "./style";
+import React from 'react';
+import { S } from './style';
 
 // 메모추가 버튼
 // 사이드바 태그버튼
@@ -20,31 +20,39 @@ export interface ButtonStyle {
 }
 
 interface IButtonProps {
-  type: "SIDEBAR" | "MEMO" | "TAG";
+  type: 'SIDEBAR' | 'MEMO' | 'TAG' | 'FILTER';
   text: string;
 }
 
 const BUTTON_TYPE = {
   SIDEBAR: {
-    width: "124px",
-    height: "40px",
-    borderRadius: "20px",
-    borderColor: "#D8D8D8",
-    buttonColor: "#FFFFFF ",
-    borderWeight: "2px",
-    marginBottom: "10px",
+    width: '124px',
+    height: '40px',
+    borderRadius: '20px',
+    borderColor: '#D8D8D8',
+    buttonColor: '#FFFFFF ',
+    borderWeight: '2px',
+    marginBottom: '10px',
   },
   MEMO: {
-    width: "104px",
-    height: "47px",
-    borderRadius: "30px",
-    buttonColor: "#a0c9a2",
+    width: '104px',
+    height: '47px',
+    borderRadius: '30px',
+    buttonColor: '#a0c9a2',
   },
   TAG: {
-    width: "64px",
-    height: "33px",
-    borderRadius: "20px",
-    buttonColor: "#EFEEEE",
+    width: '64px',
+    height: '33px',
+    borderRadius: '20px',
+    buttonColor: '#EFEEEE',
+  },
+  FILTER: {
+    width: '76px',
+    height: '38px',
+    borderRadius: '20px',
+    borderColor: '#a0c9a2',
+    borderWeight: '2px',
+    buttonColor: '#FFFFFF',
   },
 };
 
