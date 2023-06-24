@@ -6,6 +6,7 @@ export const CardListContainer = styled.section`
 
 export const CardListWrapper = styled.ul`
   display: flex;
+  justigy-contents: center;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 22px;
 `;
