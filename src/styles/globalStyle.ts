@@ -9,18 +9,16 @@ const GlobalStyles = createGlobalStyle`
     body {
       width: 100vw;
       margin: 0;
-      padding-top: 100px;
       height: 100vh;
     }
     
     #root {
-      height: 100%;
+      height: 100%
     }
     
     main {
-      width: 70%;
+      width: 80%;
       margin: 0 auto;
-      padding-top: 50px;
       height: 100%;
     }
 `;
