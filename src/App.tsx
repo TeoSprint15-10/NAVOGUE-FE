@@ -7,6 +7,7 @@ import KakaoCallback from "./components/KakaoCallback/KakaoCallback";
 import Layout from "./components/Layout";
 import { PATH_NAME } from "./constants/route";
 import GlobalStyle from "./styles/globalStyle";
+import { MemoProvider } from "./context/MemoContext";
 
 function App() {
   const queryClient = new QueryClient({
@@ -16,16 +17,21 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
-      <Layout>
-        <BrowserRouter>
-          <Routes>
-            <Route path={PATH_NAME.LOGIN} element={<LoginPage />} />
-            <Route path={PATH_NAME.KAKAOCALLBACK} element={<KakaoCallback />} />
-            <Route path={PATH_NAME.MAIN} element={<MainPage />} />
-            <Route path={PATH_NAME.NOT_FOUND} element={<NotFoundPage />} />
-          </Routes>
-        </BrowserRouter>
-      </Layout>
+      <MemoProvider>
+        <Layout>
+          <BrowserRouter>
+            <Routes>
+              <Route path={PATH_NAME.LOGIN} element={<LoginPage />} />
+              <Route
+                path={PATH_NAME.KAKAOCALLBACK}
+                element={<KakaoCallback />}
+              />
+              <Route path={PATH_NAME.MAIN} element={<MainPage />} />
+              <Route path={PATH_NAME.NOT_FOUND} element={<NotFoundPage />} />
+            </Routes>
+          </BrowserRouter>
+        </Layout>
+      </MemoProvider>
     </QueryClientProvider>
   );
 }
