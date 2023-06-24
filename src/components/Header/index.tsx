@@ -1,7 +1,7 @@
 import * as S from "./style";
-const searchIconUrl = new URL("/searchIcon.png", import.meta.url).href;
-const logoImgUrl = new URL("/logo.svg", import.meta.url).href;
-const logoTextImgUrl = new URL("/NAVOGUE.png", import.meta.url).href;
+import searchIconUrl from "/assets/searchIcon.png";
+import logoImgUrl from "/assets/logo.svg";
+import logoTextImgUrl from "/assets/NAVOGUE.png";
 
 export default function Header() {
   return (
