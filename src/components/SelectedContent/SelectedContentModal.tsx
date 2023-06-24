@@ -1,8 +1,15 @@
 import React from "react";
 import { S } from "./style";
 
-const SelectedContentModal = (props) => {
-  const { open, close, header } = props;
+interface SelectedContentModalProps {
+  open: boolean;
+  close: () => void;
+  card: { content: string };
+  header: string;
+}
+
+const SelectedContentModal = (props: SelectedContentModalProps) => {
+  const { open, close, card, header } = props;
 
   return (
     <S.Modal className={open ? "openModal" : ""}>
@@ -14,12 +21,7 @@ const SelectedContentModal = (props) => {
               &times;
             </S.ModalCloseButton>
           </S.ModalHeader>
-          <S.ModalMain>{props.children}</S.ModalMain>
-          <S.ModalFooter>
-            <S.ModalFooterButton className="close" onClick={close}>
-              close
-            </S.ModalFooterButton>
-          </S.ModalFooter>
+          <S.ModalMain>{card.content}</S.ModalMain>
         </S.ModalSection>
       ) : null}
     </S.Modal>
@@ -27,24 +29,3 @@ const SelectedContentModal = (props) => {
 };
 
 export default SelectedContentModal;
-
-// function App() {
-//   // useState를 사용하여 open상태를 변경한다. (open일때 true로 만들어 열리는 방식)
-//   const [modalOpen, setModalOpen] = useState(false);
-
-//   const openModal = () => {
-//     setModalOpen(true);
-//   };
-//   const closeModal = () => {
-//     setModalOpen(false);
-//   };
-
-//   return (
-//     <>
-//       <button onClick={openModal}>모달팝업</button>
-//       //header 부분에 텍스트를 입력한다.
-//       <SelectedContentModal open={modalOpen} close={closeModal} header="Modal heading">
-//       </SelectedContentModal>
-//     </>
-//   );
-// }
