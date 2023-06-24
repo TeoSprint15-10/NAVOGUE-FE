@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.header`
   z-index: 100;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -51,8 +51,8 @@ export const SearchInput = styled.input`
   border: none;
   border-radius: 20px;
   height: 65%;
-  padding: 10px;
-  font-size: 1rem;
+  padding: 10px 10px 10px 20px;
+  font-size: 30px;
   margin-right: 110px;
   &:focus {
     caret-color: #f0f3f0;
