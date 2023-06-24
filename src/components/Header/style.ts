@@ -13,8 +13,9 @@ export const Wrapper = styled.header`
 `;
 
 export const Overlay = styled.div`
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0.7;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  opacity: 0.8;
   height: 100%;
   width: 100%;
 `;
@@ -46,7 +47,7 @@ export const LogoImg = styled.img`
 export const LogoTextImg = styled.img``;
 
 export const SearchInput = styled.input`
-  width: 70%;
+  width: 60%;
   background-color: #f0f3f0;
   border: none;
   border-radius: 20px;
