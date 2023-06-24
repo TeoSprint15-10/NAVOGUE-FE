@@ -4,7 +4,6 @@ const Container = styled.div`
   position: relative;
   top: 25%;
   width: 100%;
-  height: 100vh;
   background-color: salmon;
   display: flex;
 `;
@@ -13,6 +12,7 @@ const MainContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+
   margin-left: 50px;
 `;
 
