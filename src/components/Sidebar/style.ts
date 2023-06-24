@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 const Container = styled.div`
   width: 200px;
   height: 100vh;
-  background-color: aquamarine;
   display: flex;
   flex-direction: column;
   align-items: center;
