@@ -1,7 +1,10 @@
+import * as S from "./style";
+
 export default function Header() {
   return (
-    <header>
-      <h1>Header</h1>
-    </header>
+    <S.Wrapper>
+      <S.Overlay></S.Overlay>
+      <S.Box>Header</S.Box>
+    </S.Wrapper>
   );
 }

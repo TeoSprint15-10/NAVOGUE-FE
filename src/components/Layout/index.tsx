@@ -1,11 +1,11 @@
 import Header from "../Header";
-import { Wrapper } from "./layout.style";
+import * as S from "./style";
 
 export default function Layout(props: { children: React.ReactNode }) {
   return (
-    <Wrapper>
+    <S.Wrapper>
       <Header />
       <main>{props.children}</main>
-    </Wrapper>
+    </S.Wrapper>
   );
 }
