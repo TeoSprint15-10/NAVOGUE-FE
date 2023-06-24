@@ -1,4 +1,6 @@
 import { S } from "./style";
+import logoImgUrl from "../../../public/assets/LOGIN_LOGO.png";
+import KakaoLoginImgUrl from "../../../public/assets/KAKAO_LOGIN.png";
 
 const KakaoLogin = () => {
   const Rest_api_key = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
@@ -7,11 +9,12 @@ const KakaoLogin = () => {
 
   return (
     <S.LoginBox>
-      {/* <S.Slogan>내 메모를 스마트하게 태깅</S.Slogan> */}
+      <S.Slogan>내 메모를 스마트하게 태깅</S.Slogan>
+      <S.LogoImg src={logoImgUrl} alt="LogoImg"></S.LogoImg>
       <S.KakaoLoginBtn>
-        <S.Text onClick={() => (window.location.href = KAKAO_AUTH_URL)}>
-          카카오 계정으로 로그인
-        </S.Text>
+        <S.Text onClick={() => (window.location.href = KAKAO_AUTH_URL)} />
+        <S.KakaoImg src={KakaoLoginImgUrl} alt="KakaoImg"></S.KakaoImg>
+        카카오 계정으로 로그인
       </S.KakaoLoginBtn>
     </S.LoginBox>
   );
