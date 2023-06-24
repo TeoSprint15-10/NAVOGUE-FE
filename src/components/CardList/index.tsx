@@ -12,12 +12,14 @@ export default function CardList({ cardList }: CardListProps) {
   );
 
   return (
-    <S.CardListWrapper>
-      {cardList?.map((card, idx) => (
-        <CardWrapper key={idx} card={card}>
-          <TextMemoContent content={card.content} />
-        </CardWrapper>
-      ))}
-    </S.CardListWrapper>
+    <S.CardListContainer>
+      <S.CardListWrapper>
+        {cardList?.map((card, idx) => (
+          <CardWrapper key={idx} card={card}>
+            <TextMemoContent content={card.content} />
+          </CardWrapper>
+        ))}
+      </S.CardListWrapper>
+    </S.CardListContainer>
   );
 }
