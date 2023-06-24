@@ -1,3 +1,5 @@
+import MemoBox from "../../components/MemoBox";
+
 export default function MainPage() {
-  return <>main page</>;
+  return <MemoBox />;
 }
