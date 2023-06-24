@@ -1,16 +1,23 @@
-import { useMemoList } from "../../hooks/queries/memoList";
-import Card from "../Card";
+import * as S from "./style";
+import CardWrapper from "../CardWrapper";
+import { Memo } from "../../types";
 
-export default function CardList() {
-  const { data: memoList } = useMemoList();
+interface CardListProps {
+  cardList: Memo[] | undefined;
+}
+
+export default function CardList({ cardList }: CardListProps) {
+  const TextMemoContent = ({ content }: { content: string }) => (
+    <span>{content}</span>
+  );
 
   return (
-    <ul>
-      {memoList?.map((memo) => (
-        <li key={memo.id}>
-          <Card>{memo.content}</Card>
-        </li>
+    <S.CardListWrapper>
+      {cardList?.map((card, idx) => (
+        <CardWrapper key={idx} card={card}>
+          <TextMemoContent content={card.content} />
+        </CardWrapper>
       ))}
-    </ul>
+    </S.CardListWrapper>
   );
 }
