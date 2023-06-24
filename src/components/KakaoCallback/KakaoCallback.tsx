@@ -41,6 +41,7 @@ const KakaoCallback = () => {
     // .catch((Error: any) => {
     //   console.log("Error", Error);
     // });
+    // .
   }, []);
 
   return (
