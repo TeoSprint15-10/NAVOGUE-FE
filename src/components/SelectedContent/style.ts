@@ -28,7 +28,7 @@ const Modal = styled.div`
   bottom: 0;
   left: 0;
   z-index: 99;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.3);
 
   &.openModal {
     display: flex;
@@ -41,14 +41,16 @@ const ModalSection = styled.section`
   width: 90%;
   max-width: 450px;
   margin: 0 auto;
-  border-radius: 0.3rem;
+  border-radius: 2rem;
   background-color: #fff;
   animation: ${modalShow} 0.3s;
   overflow: hidden;
+  border: 4px solid #a0c9a2;
 `;
 
 const ModalHeader = styled.header`
   position: relative;
+  text-align: center;
   padding: 16px 64px 16px 16px;
   background-color: #f1f1f1;
   font-weight: 700;
@@ -59,11 +61,15 @@ const ModalCloseButton = styled.button`
   top: 15px;
   right: 15px;
   width: 30px;
+  height: 30px;
   font-size: 21px;
   font-weight: 700;
   text-align: center;
-  color: #999;
-  background-color: transparent;
+  color: #fff;
+  background-color: #f87070;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
 `;
 
 const ModalMain = styled.main`
