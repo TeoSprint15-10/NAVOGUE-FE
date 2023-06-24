@@ -1,3 +1,9 @@
+import CardList from "../../components/CardList";
+
 export default function MainPage() {
-  return <>main page</>;
+  return (
+    <>
+      <CardList></CardList>
+    </>
+  );
 }
