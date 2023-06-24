@@ -23,7 +23,7 @@ const KakaoLoginBtn = styled.div`
   background-color: white;
   width: 237px;
   height: 49px;
-  margin-top: 20px; /* 수정된 부분 */
+  margin-top: 20px;
   margin-bottom: 30px;
   border: 2px solid #f0c23a;
   border-radius: 50px;
