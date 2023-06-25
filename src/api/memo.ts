@@ -1,6 +1,7 @@
 import { axiosInstance } from "./";
 
 import { Memo } from "../types";
+import axios from "axios";
 
 interface IPostMemo {
   content: string;
@@ -45,4 +46,8 @@ const deleteMemo = async (id: number) => {
   return response.data;
 };
 
+const modifyMemo = async () => {
+  const response = await axiosInstance.patch('http://localhost:8080/memo');
+  return response.data;
+};
 export { getMemoList, getMemoSearchedList, createMemo, deleteMemo };
