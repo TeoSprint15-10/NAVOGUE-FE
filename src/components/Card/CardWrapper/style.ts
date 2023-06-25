@@ -39,8 +39,6 @@ const ButtonWrapper = styled.div`
   width: 120px;
 `;
 
-const Content = styled.div`
-
 export const UrlMemoContentWrapper = styled.div`
   position: relative;
   width: 100%;
@@ -65,4 +63,3 @@ export const TagWrapper = styled.div`
   align-items: center;
   gap: 4px;
 `;
-
