@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import DeleteMemoButton from "../../../../public/assets/deleteMemoButton.png";
+import addTagButton from "../../../../public/assets/addTagButton.png";
 
 export const Container = styled.li`
   position: relative;
@@ -9,6 +11,7 @@ export const Container = styled.li`
   padding: 10px;
   margin-right: 50px;
   margin-bottom: 50px;
+  overflow-y: hidden;
 `;
 
 export const MenuWrapper = styled.div`
@@ -28,11 +31,28 @@ export const TextMemoContentWrapper = styled.div`
   text-overflow: ellipsis;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  height: 50px;
+  width: 120px;
+`;
+
+const Content = styled.div`
+
 export const UrlMemoContentWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 165px;
   cursor: pointer;
+`;
+const ModifyTextArea = styled.textarea`
+  width: 100%;
+  height: 150px;
+  background-color: white;
+  border: none;
+  resize: none;
 `;
 
 export const TagWrapper = styled.div`
@@ -45,3 +65,4 @@ export const TagWrapper = styled.div`
   align-items: center;
   gap: 4px;
 `;
+

@@ -2,6 +2,8 @@ import { TextMemo, UrlMemo } from "../../../types";
 import { ReactComponent as BookmarkFilled } from "../../../../public/assets/bookmarkFilled.svg";
 import { ReactComponent as Bookmark } from "../../../../public/assets/bookmark.svg";
 import { ReactComponent as Dot } from "../../../../public/assets/dot.svg";
+import DeleteMemoButton from "../../../../public/assets/deleteMemoButton.png";
+import addTagButton from "../../../../public/assets/addTagButton.png";
 import Button from "../../Button";
 import SelectedContentModal from "../../SelectedContent/SelectedContentModal";
 import { ModalPortal } from "../../ModalPortal/ModalPortal";
@@ -12,6 +14,9 @@ import { isTextMemo, isUrlMemo } from "../../../utils/memoTypeGuard";
 import { deleteMemo } from "../../../api/memo";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { QUERY_KEY } from "../../../constants/key";
+import { useState } from "react";
+import useInput from "../../../hooks/useInput";
+
 interface CardWrapperProps {
   card: TextMemo | UrlMemo;
 }
@@ -28,7 +33,12 @@ export default function CardWrapper({ card }: CardWrapperProps) {
       console.log(data);
     },
   });
+  const [showDeleteButton, setShowDeleteButton] = useState(false);
+  const { value, onChange } = useInput();
 
+  const handleDotClick = () => {
+    setShowDeleteButton(true);
+  };
   const handleDelete = () => {
     console.log(card.id);
 
@@ -39,9 +49,15 @@ export default function CardWrapper({ card }: CardWrapperProps) {
     <S.Container onClick={handleDelete}>
       <S.MenuWrapper>
         {card.isPinned ? <BookmarkFilled /> : <Bookmark />}
-        <Dot />
+        {showDeleteButton ? (
+          <S.ButtonWrapper>
+            <Button type="TAG" text={"삭제"} />
+            <Button type="TAG" text={"완료"} />
+          </S.ButtonWrapper>
+        ) : (
+          <Dot onClick={handleDotClick} />
+        )}
       </S.MenuWrapper>
-
       {card && isTextMemo(card) && (
         <>
           <S.TextMemoContentWrapper onClick={openModal}>{card.content}</S.TextMemoContentWrapper>
