@@ -16,13 +16,14 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { QUERY_KEY } from "../../../constants/key";
 import { useState } from "react";
 import useInput from "../../../hooks/useInput";
+import { modifyMemo } from "../../../api/memo";
 
 interface CardWrapperProps {
   card: TextMemo | UrlMemo;
 }
 
 export default function CardWrapper({ card }: CardWrapperProps) {
-  console.log(card);
+  // console.log(card);
 
   const { modalOpen, openModal, closeModal } = useModal();
   const queryClient = useQueryClient();
@@ -40,6 +41,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
 
   const handleDotClick = () => {
     setShowDeleteButton(true);
+    modifyMemo({ content: "test", id: 12 });
   };
   const handleDelete = () => {
     console.log(card.id);
@@ -48,7 +50,8 @@ export default function CardWrapper({ card }: CardWrapperProps) {
     console.log("hello");
   };
   return (
-    <S.Container onClick={handleDelete}>
+    // <S.Container onClick={handleDelete}>
+    <S.Container>
       <S.MenuWrapper>
         {card.isPinned ? <BookmarkFilled /> : <Bookmark />}
         {showDeleteButton ? (
@@ -60,29 +63,45 @@ export default function CardWrapper({ card }: CardWrapperProps) {
           <Dot onClick={handleDotClick} />
         )}
       </S.MenuWrapper>
-      {card && isTextMemo(card) && (
+      {showDeleteButton ? (
+        <S.ModifyTextArea value={"잠시"} placeholder={"대기"} />
+      ) : (
         <>
-          <S.TextMemoContentWrapper onClick={openModal}>{card.content}</S.TextMemoContentWrapper>
-          <ModalPortal>
-            <SelectedContentModal
-              open={modalOpen}
-              close={closeModal}
-              header="전체보기"
-              card={card}
-            ></SelectedContentModal>
-          </ModalPortal>
+          {card && isTextMemo(card) && (
+            <>
+              <S.TextMemoContentWrapper onClick={openModal}>
+                {card.content}
+              </S.TextMemoContentWrapper>
+              <ModalPortal>
+                <SelectedContentModal
+                  open={modalOpen}
+                  close={closeModal}
+                  header="전체보기"
+                  card={card}
+                ></SelectedContentModal>
+              </ModalPortal>
+            </>
+          )}
+          {card && isUrlMemo(card) && (
+            <S.UrlMemoContentWrapper>
+              <UrlThumbnail card={card} />
+            </S.UrlMemoContentWrapper>
+          )}
         </>
       )}
-      {card && isUrlMemo(card) && (
-        <S.UrlMemoContentWrapper>
-          <UrlThumbnail card={card} />
-        </S.UrlMemoContentWrapper>
-      )}
-
       <S.TagWrapper>
-        {card.tags.slice(0, 3).map((tag, idx) => (
-          <Button type="TAG" text={tag} key={idx} />
-        ))}
+        <S.TagsBtnWrapper>
+          {card.tags.slice(0, 3).map((tag, idx) => (
+            <S.ModifyBtnWrapper1>
+              <Button type="TAG" text={tag} key={idx} />
+              {showDeleteButton && <S.DeleteBtn />}
+            </S.ModifyBtnWrapper1>
+          ))}
+        </S.TagsBtnWrapper>
+        <S.ModifyBtnWrapper2>
+          <Button type="TAG_ADD" text={"..."} />
+          {showDeleteButton && <S.AddTagBtn />}
+        </S.ModifyBtnWrapper2>
       </S.TagWrapper>
     </S.Container>
   );

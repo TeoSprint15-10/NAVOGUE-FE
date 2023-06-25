@@ -6,17 +6,27 @@ interface IPostMemo {
   content: string;
   contentType: string;
 }
+interface ModifyMemo {
+  content: string;
+  id: number;
+}
 
-const getMemoSearchedList = async (page: number, type?: string, value?: string) => {
-  const response = await axiosWithAccessToken.get<TextMemo[]>(`/memo?page=${page}`, {
-    params: {
-      [type!]: value,
-    },
-  });
+const getMemoSearchedList = async (
+  page: number,
+  type?: string,
+  value?: string
+) => {
+  const response = await axiosWithAccessToken.get<TextMemo[]>(
+    `/memo?page=${page}`,
+    {
+      params: {
+        [type!]: value,
+      },
+    }
+  );
 
   return response.data;
 };
-
 
 const getMemoList = async (pageParam: number) => {
   const response = await axiosWithAccessToken.get<MemoListResponse>(
@@ -43,4 +53,10 @@ const deleteMemo = async (id: number) => {
   return response.data;
 };
 
-export { getMemoList, getMemoSearchedList, createMemo, deleteMemo };
+const modifyMemo = async (modifyData: ModifyMemo) => {
+  const response = await axiosWithAccessToken.patch("/memo",modifyData);
+  console.log(response);
+  return response.data;
+};
+
+export { getMemoList, getMemoSearchedList, createMemo, deleteMemo, modifyMemo };
