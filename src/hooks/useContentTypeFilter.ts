@@ -4,6 +4,7 @@ import { getMemoSearchedList } from "../api/memo";
 
 const useContentTypeFilter = () => {
   const [crntFilterState, setCrntFilterState] = useState([false, false, false]);
+
   const FILTER_TYPE = ["ALL", "URL", "TEXT"];
   const FILTER_TYPE_IDX = useRef<number>(0);
   const onClickType = (id: number) => {
@@ -24,7 +25,7 @@ const useContentTypeFilter = () => {
     }
   }, [crntFilterState]);
 
-  return { crntFilterState, onClickType };
+  return { crntFilterState, onClickType, FILTER_TYPE };
 };
 
 export default useContentTypeFilter;
