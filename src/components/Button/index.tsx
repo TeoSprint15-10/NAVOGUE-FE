@@ -22,7 +22,7 @@ export interface ButtonStyle {
 }
 
 interface IButtonProps {
-  type: "SIDEBAR" | "MEMO" | "TAG" | "FILTER";
+  type: "SIDEBAR" | "MEMO" | "TAG" | "FILTER" | "TAG_ADD";
   text: string;
   isClicked?: boolean;
   onClick?: () => void;
@@ -58,6 +58,13 @@ const BUTTON_TYPE = {
     buttonColor: "#FFFFFF ",
     clickedColor: "#A0C9A2",
     borderWeight: "2px",
+  },
+  TAG_ADD: {
+    width:"33px",
+    height:"33px",
+    borderRadius: "20px",
+    buttonColor: "#EFEEEE ",
+    // border: 'none'
   },
 };
 
