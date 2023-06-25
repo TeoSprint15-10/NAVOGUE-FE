@@ -1,6 +1,6 @@
-import { axiosInstance } from "./";
-
-import { Memo } from "../types";
+import { axiosInstance, axiosWithAccessToken } from "./";
+import { TextMemo } from "../types";
+import { getMemoListResponse } from "../types/responseType";
 
 interface IPostMemo {
   content: string;
@@ -8,16 +8,19 @@ interface IPostMemo {
 }
 
 const getMemoSearchedList = async (type?: string, value?: string) => {
-  const response = await axiosInstance.get<Memo[]>(`/memo`, {
+  const response = await axiosInstance.get<TextMemo[]>(`/memo`, {
     params: {
       [type!]: value,
     },
   });
+
   return response.data;
 };
 
 const getMemoList = async () => {
-  const response = await axiosInstance.get<Memo[]>("/src/data/memoList.json");
+  const response = await axiosWithAccessToken.get<getMemoListResponse>(
+    "/memo?page=1"
+  );
 
   return response.data;
 };

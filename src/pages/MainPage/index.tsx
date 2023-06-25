@@ -4,7 +4,6 @@ import CardList from "../../components/Card/CardList";
 import { useMemoList } from "../../hooks/queries/memoList";
 import FilterCheckbox from "../../components/FilterCheckbox";
 import { S } from "./style";
-import TagModal from "../../components/TagModal";
 
 export default function MainPage() {
   const { data: memoList } = useMemoList();
@@ -15,7 +14,7 @@ export default function MainPage() {
       <S.MainContent>
         <MemoInputBox />
         <FilterCheckbox />
-        <CardList cardList={memoList}></CardList>;
+        <CardList cardList={memoList?.content}></CardList>;
       </S.MainContent>
     </S.Container>
   );
