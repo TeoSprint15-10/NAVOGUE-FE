@@ -1,11 +1,10 @@
 import * as S from "./style";
 import { ChangeEvent, useContext, useState } from "react";
 import searchIconUrl from "/assets/searchIcon.png";
-import logoImgUrl from "/assets/logo.svg";
+import logoImgUrl from "../../../public/assets/logo.svg";
 import logoTextImgUrl from "/assets/NAVOGUE.png";
 import { getMemoSearchedList } from "../../api/memo";
 import { MemoContext } from "../../context/MemoContext";
-import { TextMemo } from "../../types";
 
 export default function Header() {
   const { memoList, setMemoList } = useContext(MemoContext);

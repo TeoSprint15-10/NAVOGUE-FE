@@ -46,6 +46,7 @@ const ModalSection = styled.section`
   animation: ${modalShow} 0.3s;
   overflow: hidden;
   border: 4px solid #a0c9a2;
+  height: 300px;
 `;
 
 const ModalHeader = styled.header`
