@@ -1,4 +1,4 @@
-import { axiosInstance, axiosWithAccessToken } from "./";
+import { axiosWithAccessToken } from "./";
 import { TextMemo } from "../types";
 import { getMemoListResponse } from "../types/responseType";
 
@@ -7,8 +7,8 @@ interface IPostMemo {
   contentType: string;
 }
 
-const getMemoSearchedList = async (type?: string, value?: string) => {
-  const response = await axiosInstance.get<TextMemo[]>(`/memo`, {
+const getMemoSearchedList = async (page: number, type?: string, value?: string) => {
+  const response = await axiosWithAccessToken.get<TextMemo[]>(`/memo?page=${page}`, {
     params: {
       [type!]: value,
     },
@@ -18,33 +18,25 @@ const getMemoSearchedList = async (type?: string, value?: string) => {
 };
 
 const getMemoList = async () => {
-  const response = await axiosWithAccessToken.get<getMemoListResponse>(
-    "/memo?page=1"
-  );
+  const response = await axiosWithAccessToken.get<getMemoListResponse>("/memo?page=1");
 
   return response.data;
 };
 
 const createMemo = async (contentData: IPostMemo) => {
   const { content, contentType } = contentData;
-  const response = await axiosInstance.post(
-    "/memo",
-    {
-      content,
-      contentType,
-    },
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Cookie: "JSESSIONID=81E3889A3D7E6FE69927C042E7E2BA4A",
-      },
-    }
-  );
+  const requestData = JSON.stringify({
+    content,
+    contentType,
+  });
+  const response = await axiosWithAccessToken.post("/memo", requestData);
   return response.data;
 };
 
 const deleteMemo = async (id: number) => {
-  const response = await axiosInstance.delete(`/memo/${id}`);
+  const response = await axiosWithAccessToken.delete(`/memo/${id}`);
+  console.log(response);
+
   return response.data;
 };
 
