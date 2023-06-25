@@ -11,7 +11,7 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = async (): Promise<void> => {
-    const data = await getMemoSearchedList(searchQuery);
+    const data = await getMemoSearchedList(1, "keyword", searchQuery);
     setMemoList(data);
   };
 
