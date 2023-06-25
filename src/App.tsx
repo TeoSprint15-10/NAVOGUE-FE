@@ -37,7 +37,6 @@ function App() {
         </MemoProvider>
       </QueryClientProvider>
     </RecoilRoot>
-
   );
 }
 
