@@ -1,10 +1,13 @@
-import { useEffect, useRef, useState } from "react";
-import { getMemoSearchedList } from "../api/memo";
+import { useRef, useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { filterState } from "../recoil/atoms/filterState";
+
 // 컨텐츠 타입에 따른 필터링
 
 const useContentTypeFilter = () => {
+  const [filterInfo, setFilterInfo] = useRecoilState(filterState);
+  console.log(filterInfo);
   const [crntFilterState, setCrntFilterState] = useState([false, false, false]);
-
   const FILTER_TYPE = ["ALL", "URL", "TEXT"];
   const FILTER_TYPE_IDX = useRef<number>(0);
   const onClickType = (id: number) => {
@@ -18,10 +21,17 @@ const useContentTypeFilter = () => {
 
   useEffect(() => {
     FILTER_TYPE_IDX.current = crntFilterState.indexOf(true);
-    if (FILTER_TYPE_IDX.current === 0) {
-      const getMemoData = getMemoSearchedList();
-    } else {
-      const getMemoData = getMemoSearchedList("keyword", `${FILTER_TYPE[FILTER_TYPE_IDX.current]}`);
+
+    switch (FILTER_TYPE_IDX.current) {
+      case 0:
+        setFilterInfo({ triggerType: undefined, target: undefined });
+        break;
+      case 1:
+        setFilterInfo({ triggerType: "type", target: "URL" });
+        break;
+      case 2:
+        setFilterInfo({ triggerType: "type", target: "TEXT" });
+        break;
     }
   }, [crntFilterState]);
 

@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getMemoList } from "../../api/memo";
+import { getMemoSearchedList } from "../../api/memo";
 import { QUERY_KEY } from "../../constants/key";
 
-export function useMemoList() {
+export function useMemoList(filterType: string | undefined, target: string | undefined) {
   return useQuery({
     queryKey: [QUERY_KEY.MEMO_LIST],
-    queryFn: () => getMemoList(),
+    queryFn: () => getMemoSearchedList(0, filterType, target),
   });
 }

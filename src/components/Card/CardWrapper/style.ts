@@ -2,10 +2,11 @@ import styled from "styled-components";
 import DeleteMemoButton from "../../../../public/assets/deleteMemoButton.png";
 import addTagButton from "../../../../public/assets/addTagButton.png";
 
-const Container = styled.div`
+export const Container = styled.li`
+  position: relative;
   width: 23%;
   height: 240px;
-  background-color: #f7f8f9;
+  background-color: white;
   border-radius: 10px;
   padding: 10px;
   margin-right: 50px;
@@ -13,11 +14,21 @@ const Container = styled.div`
   overflow-y: hidden;
 `;
 
-const MenuWrapper = styled.div`
+export const MenuWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 50px;
+  height: 30px;
   width: 100%;
+`;
+
+export const TextMemoContentWrapper = styled.div`
+  width: 100%;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const ButtonWrapper = styled.div`
@@ -29,9 +40,11 @@ const ButtonWrapper = styled.div`
 `;
 
 const Content = styled.div`
+
+export const UrlMemoContentWrapper = styled.div`
+  position: relative;
   width: 100%;
-  height: 150px;
-  background-color: white;
+  height: 165px;
   cursor: pointer;
 `;
 const ModifyTextArea = styled.textarea`
@@ -42,78 +55,14 @@ const ModifyTextArea = styled.textarea`
   resize: none;
 `;
 
-const TagWrapper = styled.div`
+export const TagWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
   margin-top: 10px;
   width: 100%;
+  height: 40px;
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  height: 50px;
-  position: relative;
-`;
-const TagsBtnWrapper = styled.div`
-  overflow-x: auto;
-  overflow-y: hidden;
-  position: relative;
-  display: flex;
-  gap: 10px;
-  width: 100%;
-  padding: 0;
-`;
-const ModifyBtnWrapper1 = styled.div`
-  position: relative;
-  gap: 10px;
-  :first-child {
-    cursor: default;
-  }
-`;
-const ModifyBtnWrapper2 = styled.div`
-  position: relative;
-  gap: 10px;
-  :first-child {
-    cursor: default;
-  }
+  align-items: center;
+  gap: 4px;
 `;
 
-const DeleteBtn = styled.button`
-  position: absolute;
-  border-radius: 50%;
-  border-style: none;
-  background-image: url(${DeleteMemoButton});
-  background-size: cover;
-  background-color: #ffff;
-  width: 15px;
-  height: 15px;
-  right: 0;
-  top: -5px;
-  padding: 0;
-  cursor: pointer;
-`;
-const AddTagBtn = styled.button`
-  position: absolute;
-  border-radius: 50%;
-  border-style: none;
-  background-image: url(${addTagButton});
-  background-size: contain;
-  background-color: #ffff;
-  width: 15px;
-  height: 15px;
-  right: 0;
-  top: -5px;
-  padding: 0;
-  cursor: pointer;
-`;
-
-export const S = {
-  Container,
-  MenuWrapper,
-  ButtonWrapper,
-  TagsBtnWrapper,
-  ModifyBtnWrapper1,
-  ModifyBtnWrapper2,
-  TagWrapper,
-  DeleteBtn,
-  AddTagBtn,
-  Content,
-  ModifyTextArea,
-};
