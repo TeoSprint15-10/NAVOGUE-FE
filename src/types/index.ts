@@ -10,3 +10,8 @@ export type Tag = {
   id: number;
   name: string;
 };
+
+export type MemoTagListData = {
+  memoId: string;
+  tagNames: string[];
+};

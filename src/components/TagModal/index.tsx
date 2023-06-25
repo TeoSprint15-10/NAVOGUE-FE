@@ -1,8 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as S from "./style";
 import Button from "../Button";
+import { MemoTagListData } from "../../types";
+import { postMemoTagList } from "../../api/tag";
 
-export default function TagModal() {
+export default function TagModal({ memoId, tagNames }: MemoTagListData) {
+  const [inputValue, setInputValue] = useState("");
+  const [tags, setTags] = useState(tagNames);
+  const [isOpen, setIsOpen] = useState(true);
+  const [isDuplicateTag, setIsDuplicateTag] = useState(false);
+
+  useEffect(() => {
+    setTags(tagNames);
+  }, [tagNames]);
+
   useEffect(() => {
     const scrollbarWidth =
       window.innerWidth - document.documentElement.clientWidth;
@@ -15,36 +26,61 @@ export default function TagModal() {
     };
   }, []);
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setInputValue(e.target.value);
+    setIsDuplicateTag(false);
+  };
+
+  const handleAddTags = (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmedValue = inputValue.trim();
+    if (trimmedValue === "" || tags.includes(trimmedValue)) {
+      setIsDuplicateTag(true);
+      return;
+    }
+    const updatedTagNames = [...tags, trimmedValue];
+    setTags(updatedTagNames);
+    setInputValue("");
+  };
+
+  const handleSaveTags = async (): Promise<void> => {
+    await postMemoTagList({ memoId, tagNames: tags });
+    setInputValue("");
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
-      <S.Overlay />
-      <S.Wrapper style={{ top: scrollY + 100 }}>
-        <S.ModalTitle>태그 추가</S.ModalTitle>
-        <S.ModalSearchBar>
-          <S.ModalSearchTitle>검색</S.ModalSearchTitle>
-          <S.ModalSearchInput />
-        </S.ModalSearchBar>
-        <S.ModalTagWrapper>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-          <Button type="TAG" text="리액트"></Button>
-        </S.ModalTagWrapper>
-        <S.ModalButtonWrapper>
-          <S.ModalButton>저장</S.ModalButton>
-        </S.ModalButtonWrapper>
-      </S.Wrapper>
+      {isOpen && <S.Overlay onClick={handleCloseModal} />}
+      {isOpen && (
+        <S.Wrapper style={{ top: scrollY + 100 }}>
+          <S.ModalInputWrapper>
+            <S.ModalTitle>태그 추가</S.ModalTitle>
+            <S.ModalInputBar>
+              <S.ModalForm onSubmit={handleAddTags}>
+                <S.ModalInput onChange={handleInputChange} value={inputValue} />
+                <S.ModalAddButton type="submit">추가</S.ModalAddButton>
+              </S.ModalForm>
+              <S.DuplicateTagMessage>
+                {isDuplicateTag ? "중복된 태그가 있습니다." : ""}
+              </S.DuplicateTagMessage>
+            </S.ModalInputBar>
+          </S.ModalInputWrapper>
+          <S.ModalTagWrapper>
+            {tags.map((item, index) => (
+              <Button key={`${memoId}-${index}`} type="TAG" text={item} />
+            ))}
+          </S.ModalTagWrapper>
+          <S.ModalButtonWrapper>
+            <S.ModalSubmitButton onClick={handleSaveTags}>
+              저장
+            </S.ModalSubmitButton>
+          </S.ModalButtonWrapper>
+        </S.Wrapper>
+      )}
     </>
   );
 }
