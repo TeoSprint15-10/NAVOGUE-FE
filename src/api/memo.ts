@@ -53,8 +53,8 @@ const deleteMemo = async (id: number) => {
   return response.data;
 };
 
-const modifyMemo = async (ModifyData: ModifyMemo) => {
-  const response = await axiosWithAccessToken.patch("/memo");
+const modifyMemo = async (modifyData: ModifyMemo) => {
+  const response = await axiosWithAccessToken.patch("/memo",modifyData);
   console.log(response);
   return response.data;
 };

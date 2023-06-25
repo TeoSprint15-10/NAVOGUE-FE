@@ -16,6 +16,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { QUERY_KEY } from "../../../constants/key";
 import { useState } from "react";
 import useInput from "../../../hooks/useInput";
+import { modifyMemo } from "../../../api/memo";
 
 interface CardWrapperProps {
   card: TextMemo | UrlMemo;
@@ -40,6 +41,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
 
   const handleDotClick = () => {
     setShowDeleteButton(true);
+    modifyMemo({ content: "test", id: 12 });
   };
   const handleDelete = () => {
     console.log(card.id);
@@ -48,7 +50,8 @@ export default function CardWrapper({ card }: CardWrapperProps) {
     console.log("hello");
   };
   return (
-    <S.Container onClick={handleDelete}>
+    // <S.Container onClick={handleDelete}>
+    <S.Container>
       <S.MenuWrapper>
         {card.isPinned ? <BookmarkFilled /> : <Bookmark />}
         {showDeleteButton ? (
