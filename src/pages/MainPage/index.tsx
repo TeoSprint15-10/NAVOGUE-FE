@@ -12,7 +12,7 @@ export default function MainPage() {
       <Sidebar />
       <S.MainContent>
         <MemoInputBox />
-        <CardList cardList={memoList}></CardList>;
+        <CardList cardList={memoList?.content}></CardList>;
       </S.MainContent>
     </S.Container>
   );
