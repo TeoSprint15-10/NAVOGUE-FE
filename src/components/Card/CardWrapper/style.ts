@@ -14,7 +14,6 @@ const MenuWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   height: 50px;
-
   width: 100%;
 `;
 
