@@ -8,11 +8,13 @@ export const Overlay = styled.div`
   height: 100%;
   opacity: 1;
   z-index: 16;
+  background-color: rgba(0, 0, 0, 0.3);
 `;
 export const Wrapper = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   width: 300px;
   height: 400px;
@@ -35,23 +37,52 @@ export const ModalTitle = styled.h2`
   text-align: center;
 `;
 
-export const ModalSearchBar = styled.div``;
-
-export const ModalSearchTitle = styled.h4`
-  margin-bottom: 20px;
-  font-size: 12px;
+export const ModalInputWrapper = styled.div`
+  width: 100%;
 `;
-export const ModalSearchInput = styled.input`
-  font-size: 12px;
+
+export const ModalInputBar = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px 10px;
+`;
+export const ModalInput = styled.input`
+  font-size: 15px;
+  width: 80%;
   border: none;
-  width: 240px;
   border-bottom: 3px solid #a0c9a2;
   &:focus {
     outline: none;
   }
 `;
 
+export const ModalForm = styled.form`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const DuplicateTagMessage = styled.p`
+  color: red;
+  width: 100%;
+  height: 16px;
+  margin: 3px 0px;
+`;
+
+export const ModalAddButton = styled.button`
+  cursor: pointer;
+  height: 20px;
+  border: none;
+  color: #ffffff;
+  font-size: 15px;
+  border-radius: 3px;
+  background: #a0c9a2;
+`;
+
 export const ModalTagWrapper = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
   padding: 10px 0px;
@@ -79,7 +110,7 @@ export const ModalButtonWrapper = styled.div`
   padding: 10px 0px;
 `;
 
-export const ModalButton = styled.button`
+export const ModalSubmitButton = styled.button`
   cursor: pointer;
   display: block;
   width: 105px;

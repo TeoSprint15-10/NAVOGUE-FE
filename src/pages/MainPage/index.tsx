@@ -3,6 +3,7 @@ import MemoInputBox from "../../components/MemoInputBox";
 import CardList from "../../components/Card/CardList";
 import { useMemoList } from "../../hooks/queries/memoList";
 import { S } from "./style";
+import TagModal from "../../components/TagModal";
 
 export default function MainPage() {
   const { data: memoList } = useMemoList();
@@ -10,6 +11,7 @@ export default function MainPage() {
   return (
     <S.Container>
       <Sidebar />
+      <TagModal tagNames={[]} memoId="1" />
       <S.MainContent>
         <MemoInputBox />
         <CardList cardList={memoList}></CardList>;
