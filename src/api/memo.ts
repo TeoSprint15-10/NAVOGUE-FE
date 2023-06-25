@@ -19,7 +19,7 @@ const getMemoSearchedList = async (type?: string, value?: string) => {
 
 const getMemoList = async () => {
   const response = await axiosWithAccessToken.get<getMemoListResponse>(
-    "/api/memo"
+    "/memo?page=1"
   );
 
   return response.data;

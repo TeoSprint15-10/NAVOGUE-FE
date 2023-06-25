@@ -8,7 +8,7 @@ import TagModal from "../../components/TagModal";
 
 export default function MainPage() {
   const { data: memoList } = useMemoList();
-
+  console.log(memoList);
   return (
     <S.Container>
       <Sidebar />
