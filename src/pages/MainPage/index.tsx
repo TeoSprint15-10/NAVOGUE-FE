@@ -7,6 +7,7 @@ import { S } from "./style";
 
 export default function MainPage() {
   const { data: memoList } = useMemoList();
+  console.log(memoList);
 
   return (
     <S.Container>

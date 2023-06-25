@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { createMemo } from "../api/memo";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import isValidUrl from "../util/isValidUrl";
 
 const useCreateMemo = () => {
@@ -11,8 +10,6 @@ const useCreateMemo = () => {
 
   const postMemo = (textareaValue: string) => {
     const contentType = isValidUrl(textareaValue) ? "URL" : "TEXT";
-    console.log(contentType);
-
     post({
       content: textareaValue,
       contentType,

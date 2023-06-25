@@ -9,16 +9,34 @@ import useModal from "../../../hooks/useModal";
 import UrlThumbnail from "../UrlThumbnail";
 import * as S from "./style";
 import { isTextMemo, isUrlMemo } from "../../../utils/memoTypeGuard";
-
+import { deleteMemo } from "../../../api/memo";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { QUERY_KEY } from "../../../constants/key";
 interface CardWrapperProps {
   card: TextMemo | UrlMemo;
 }
 
 export default function CardWrapper({ card }: CardWrapperProps) {
   const { modalOpen, openModal, closeModal } = useModal();
+  const queryClient = useQueryClient();
+  const { mutate: del } = useMutation(deleteMemo, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries([QUERY_KEY.MEMO_LIST]);
+      console.log(data);
+    },
+    onError: (data) => {
+      console.log(data);
+    },
+  });
 
+  const handleDelete = () => {
+    console.log(card.id);
+
+    del(card.id);
+    console.log("hello");
+  };
   return (
-    <S.Container>
+    <S.Container onClick={handleDelete}>
       <S.MenuWrapper>
         {card.isPinned ? <BookmarkFilled /> : <Bookmark />}
         <Dot />
@@ -26,9 +44,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
 
       {isTextMemo(card) && (
         <>
-          <S.TextMemoContentWrapper onClick={openModal}>
-            {card.content}
-          </S.TextMemoContentWrapper>
+          <S.TextMemoContentWrapper onClick={openModal}>{card.content}</S.TextMemoContentWrapper>
           <ModalPortal>
             <SelectedContentModal
               open={modalOpen}
