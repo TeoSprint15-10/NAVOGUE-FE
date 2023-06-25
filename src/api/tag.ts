@@ -1,5 +1,12 @@
+
 import { axiosWithAccessToken } from "./";
 import { MemoTagData, MemoTagListData } from "../types";
+
+const getTagList = async () => {
+  const response = await axiosWithAccessToken.get("/tag");
+  return response.data;
+};
+
 
 const createTags = async (tagData: MemoTagListData) => {
   const { memoId, tagNames } = tagData;
@@ -19,4 +26,5 @@ const deleteTag = async (tagData: MemoTagData) => {
   return response.data;
 };
 
-export { createTags, deleteTag };
+export { createTags, deleteTag, getTagList };
+

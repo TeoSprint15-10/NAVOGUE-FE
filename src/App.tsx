@@ -7,6 +7,7 @@ import KakaoCallback from "./components/KakaoCallback/KakaoCallback";
 import Layout from "./components/Layout";
 import { PATH_NAME } from "./constants/route";
 import GlobalStyle from "./styles/globalStyle";
+import { RecoilRoot } from "recoil";
 import { MemoProvider } from "./context/MemoContext";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -16,25 +17,27 @@ function App() {
   });
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <GlobalStyle />
-      <MemoProvider>
-        <Layout>
-          <BrowserRouter>
-            <Routes>
-              <Route path={PATH_NAME.LOGIN} element={<LoginPage />} />
-              {/* <Route
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <GlobalStyle />
+        <MemoProvider>
+          <Layout>
+            <BrowserRouter>
+              <Routes>
+                <Route path={PATH_NAME.LOGIN} element={<LoginPage />} />
+                {/* <Route
                 path={PATH_NAME.KAKAOCALLBACK}
                 element={<KakaoCallback />}
               /> */}
-              <Route path={PATH_NAME.MAIN} element={<MainPage />} />
-              <Route path={PATH_NAME.NOT_FOUND} element={<NotFoundPage />} />
-            </Routes>
-          </BrowserRouter>
-        </Layout>
-      </MemoProvider>
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+                <Route path={PATH_NAME.MAIN} element={<MainPage />} />
+                <Route path={PATH_NAME.NOT_FOUND} element={<NotFoundPage />} />
+              </Routes>
+            </BrowserRouter>
+          </Layout>
+        </MemoProvider>
+      </QueryClientProvider>
+    </RecoilRoot>
+
   );
 }
 

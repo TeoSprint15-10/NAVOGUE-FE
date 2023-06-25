@@ -5,14 +5,16 @@ import logoImgUrl from "../../../public/assets/logo.svg";
 import logoTextImgUrl from "/assets/NAVOGUE.png";
 import { getMemoSearchedList } from "../../api/memo";
 import { MemoContext } from "../../context/MemoContext";
+import { useRecoilState } from "recoil";
+import { filterState } from "../../recoil/atoms/filterState";
 
 export default function Header() {
-  const { memoList, setMemoList } = useContext(MemoContext);
+  const [filterInfo, setFilterInfo] = useRecoilState(filterState);
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = async (): Promise<void> => {
-    const data = await getMemoSearchedList(1, "keyword", searchQuery);
-    setMemoList(data);
+    setFilterInfo({ triggerType: "keyword", target: searchQuery });
+
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
