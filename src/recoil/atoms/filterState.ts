@@ -1,9 +1,13 @@
 import { atom } from "recoil";
 
-const initialState = {
-  tag: false,
-  keyword: false,
-  type: false,
+interface IState {
+  triggerType: undefined | string;
+  target: undefined | string;
+}
+
+const initialState: IState = {
+  triggerType: undefined,
+  target: undefined,
 };
 
 export const filterState = atom({
