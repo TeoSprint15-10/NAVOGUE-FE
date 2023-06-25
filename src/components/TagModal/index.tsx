@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import * as S from "./style";
 import Button from "../Button";
 import { MemoTagListData } from "../../types";
-import { postMemoTagList } from "../../api/tag";
+import { createTags } from "../../api/tag";
 
 export default function TagModal({ memoId, tagNames }: MemoTagListData) {
   const [inputValue, setInputValue] = useState("");
@@ -44,7 +44,7 @@ export default function TagModal({ memoId, tagNames }: MemoTagListData) {
   };
 
   const handleSaveTags = async (): Promise<void> => {
-    await postMemoTagList({ memoId, tagNames: tags });
+    await createTags({ memoId, tagNames: tags });
     setInputValue("");
   };
 

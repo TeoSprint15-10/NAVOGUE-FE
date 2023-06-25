@@ -53,4 +53,11 @@ const KakaoImg = styled.img`
 export const logoImgUrl = styled.img``;
 export const KakaoLoginImgUrl = styled.img``;
 
-export const S = { LoginBox, Slogan, KakaoLoginBtn, Text, LogoImg, KakaoImg };
+export const S = {
+  LoginBox,
+  Slogan,
+  KakaoLoginBtn,
+  Text,
+  LogoImg,
+  KakaoImg,
+};

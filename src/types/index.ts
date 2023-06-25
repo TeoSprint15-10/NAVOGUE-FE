@@ -40,3 +40,8 @@ export type MemoTagListData = {
   memoId: string;
   tagNames: string[];
 };
+
+export type MemoTagData = {
+  memoId: string;
+  tagName: string;
+};
