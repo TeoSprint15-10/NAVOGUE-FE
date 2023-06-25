@@ -22,6 +22,7 @@ export interface ButtonStyle {
 interface IButtonProps {
   type: "SIDEBAR" | "MEMO" | "TAG";
   text: string;
+  onClick?: () => void;
 }
 
 const BUTTON_TYPE = {
@@ -50,7 +51,11 @@ const BUTTON_TYPE = {
 
 function Button({ ...props }: IButtonProps) {
   const style = BUTTON_TYPE[props.type] as ButtonStyle;
-  return <S.Container {...style}>{props.text}</S.Container>;
+  return (
+    <S.Container onClick={props.onClick} {...style}>
+      {props.text}
+    </S.Container>
+  );
 }
 
 export default Button;
