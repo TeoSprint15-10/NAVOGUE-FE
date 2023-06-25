@@ -19,9 +19,9 @@ const useContentTypeFilter = () => {
   useEffect(() => {
     FILTER_TYPE_IDX.current = crntFilterState.indexOf(true);
     if (FILTER_TYPE_IDX.current === 0) {
-      const getMemoData = getMemoSearchedList();
+      const getMemoData = getMemoSearchedList(1);
     } else {
-      const getMemoData = getMemoSearchedList("keyword", `${FILTER_TYPE[FILTER_TYPE_IDX.current]}`);
+      const getMemoData = getMemoSearchedList(1, "keyword", `${FILTER_TYPE[FILTER_TYPE_IDX.current]}`);
     }
   }, [crntFilterState]);
 

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import * as S from "./style";
 import Button from "../Button";
 import { MemoTagListData } from "../../types";
-import { postMemoTagList } from "../../api/tag";
+import { createTag } from "../../api/tag";
 
 export default function TagModal({ memoId, tagNames }: MemoTagListData) {
   const [inputValue, setInputValue] = useState("");
@@ -15,8 +15,7 @@ export default function TagModal({ memoId, tagNames }: MemoTagListData) {
   }, [tagNames]);
 
   useEffect(() => {
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
     document.body.style.paddingRight = `${scrollbarWidth}px`;
 
@@ -44,7 +43,7 @@ export default function TagModal({ memoId, tagNames }: MemoTagListData) {
   };
 
   const handleSaveTags = async (): Promise<void> => {
-    await postMemoTagList({ memoId, tagNames: tags });
+    await createTag({ memoId, tagNames: tags });
     setInputValue("");
   };
 
@@ -64,9 +63,7 @@ export default function TagModal({ memoId, tagNames }: MemoTagListData) {
                 <S.ModalInput onChange={handleInputChange} value={inputValue} />
                 <S.ModalAddButton type="submit">추가</S.ModalAddButton>
               </S.ModalForm>
-              <S.DuplicateTagMessage>
-                {isDuplicateTag ? "중복된 태그가 있습니다." : ""}
-              </S.DuplicateTagMessage>
+              <S.DuplicateTagMessage>{isDuplicateTag ? "중복된 태그가 있습니다." : ""}</S.DuplicateTagMessage>
             </S.ModalInputBar>
           </S.ModalInputWrapper>
           <S.ModalTagWrapper>
@@ -75,9 +72,7 @@ export default function TagModal({ memoId, tagNames }: MemoTagListData) {
             ))}
           </S.ModalTagWrapper>
           <S.ModalButtonWrapper>
-            <S.ModalSubmitButton onClick={handleSaveTags}>
-              저장
-            </S.ModalSubmitButton>
+            <S.ModalSubmitButton onClick={handleSaveTags}>저장</S.ModalSubmitButton>
           </S.ModalButtonWrapper>
         </S.Wrapper>
       )}
