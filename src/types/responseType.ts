@@ -1,6 +1,6 @@
 import { TextMemo, UrlMemo } from "./";
 
-export type getMemoListResponse = {
+export type MemoListResponse = {
   content: (TextMemo | UrlMemo)[];
   pageable: Pageable;
   first: boolean;

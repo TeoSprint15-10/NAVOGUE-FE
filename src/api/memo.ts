@@ -1,6 +1,6 @@
 import { axiosInstance, axiosWithAccessToken } from "./";
 import { TextMemo } from "../types";
-import { getMemoListResponse } from "../types/responseType";
+import { MemoListResponse } from "../types/responseType";
 
 interface IPostMemo {
   content: string;
@@ -17,9 +17,9 @@ const getMemoSearchedList = async (type?: string, value?: string) => {
   return response.data;
 };
 
-const getMemoList = async () => {
-  const response = await axiosWithAccessToken.get<getMemoListResponse>(
-    "/memo?page=1"
+const getMemoList = async (pageParam: number) => {
+  const response = await axiosWithAccessToken.get<MemoListResponse>(
+    `/memo?page=${pageParam}`
   );
 
   return response.data;

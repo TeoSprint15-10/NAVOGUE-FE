@@ -8,6 +8,7 @@ import Layout from "./components/Layout";
 import { PATH_NAME } from "./constants/route";
 import GlobalStyle from "./styles/globalStyle";
 import { MemoProvider } from "./context/MemoContext";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 function App() {
   const queryClient = new QueryClient({
@@ -32,6 +33,7 @@ function App() {
           </BrowserRouter>
         </Layout>
       </MemoProvider>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
