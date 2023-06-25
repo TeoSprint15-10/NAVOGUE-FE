@@ -2,7 +2,7 @@ import * as S from "./style";
 import CardWrapper from "../CardWrapper";
 import { Memo } from "../../../types";
 
-interface CardListProps {
+export interface CardListProps {
   cardList: Memo[] | undefined;
 }
 
