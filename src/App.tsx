@@ -22,10 +22,10 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path={PATH_NAME.LOGIN} element={<LoginPage />} />
-              <Route
+              {/* <Route
                 path={PATH_NAME.KAKAOCALLBACK}
                 element={<KakaoCallback />}
-              />
+              /> */}
               <Route path={PATH_NAME.MAIN} element={<MainPage />} />
               <Route path={PATH_NAME.NOT_FOUND} element={<NotFoundPage />} />
             </Routes>

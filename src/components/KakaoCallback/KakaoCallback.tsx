@@ -35,9 +35,6 @@ const KakaoCallback = () => {
         //       },
         //     }
         //   )
-        //   .then((res: any) => {
-        //     console.log("2번쨰", res);
-        //   });
       });
     // .catch((Error: any) => {
     //   console.log("Error", Error);
