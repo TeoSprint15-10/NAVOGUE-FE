@@ -22,6 +22,8 @@ interface CardWrapperProps {
 }
 
 export default function CardWrapper({ card }: CardWrapperProps) {
+  console.log(card);
+
   const { modalOpen, openModal, closeModal } = useModal();
   const queryClient = useQueryClient();
   const { mutate: del } = useMutation(deleteMemo, {
