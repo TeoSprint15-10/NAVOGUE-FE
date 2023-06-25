@@ -5,7 +5,7 @@ const Container = styled.button<ButtonStyle>`
   cursor: pointer;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  background-color: ${(props) => props.buttonColor};
+  background-color: ${(props) => (props.isClicked ? props.clickedColor : props.buttonColor)};
   border-radius: ${(props) => props.borderRadius};
   color: ${(props) => props.fontColor};
   font-size: ${(props) => props.fontSize};

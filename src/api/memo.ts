@@ -7,8 +7,12 @@ interface IPostMemo {
   contentType: string;
 }
 
-const getMemoSearchedList = async (keyword?: string) => {
-  const response = await axiosInstance.get<Memo[]>(`/memo?keyword=${keyword}`);
+const getMemoSearchedList = async (type?: string, value?: string) => {
+  const response = await axiosInstance.get<Memo[]>(`/memo`, {
+    params: {
+      [type!]: value,
+    },
+  });
   return response.data;
 };
 

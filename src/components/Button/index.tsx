@@ -17,11 +17,14 @@ export interface ButtonStyle {
   text: string;
   borderWeight?: string;
   marginBottom?: string;
+  isClicked?: boolean;
+  clickedColor?: string;
 }
 
 interface IButtonProps {
-  type: "SIDEBAR" | "MEMO" | "TAG";
+  type: "SIDEBAR" | "MEMO" | "TAG" | "FILTER";
   text: string;
+  isClicked?: boolean;
   onClick?: () => void;
 }
 
@@ -47,12 +50,21 @@ const BUTTON_TYPE = {
     borderRadius: "20px",
     buttonColor: "#EFEEEE",
   },
+  FILTER: {
+    width: "64px",
+    height: "33px",
+    borderRadius: "20px",
+    borderColor: "#A0C9A2",
+    buttonColor: "#FFFFFF ",
+    clickedColor: "#A0C9A2",
+    borderWeight: "2px",
+  },
 };
 
 function Button({ ...props }: IButtonProps) {
   const style = BUTTON_TYPE[props.type] as ButtonStyle;
   return (
-    <S.Container onClick={props.onClick} {...style}>
+    <S.Container onClick={props.onClick} {...style} isClicked={props.isClicked}>
       {props.text}
     </S.Container>
   );
