@@ -11,7 +11,6 @@ export default function MainPage() {
   return (
     <S.Container>
       <Sidebar />
-      <TagModal tagNames={[]} memoId="1" />
       <S.MainContent>
         <MemoInputBox />
         <CardList cardList={memoList}></CardList>;
