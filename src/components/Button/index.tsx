@@ -64,7 +64,6 @@ const BUTTON_TYPE = {
     height:"33px",
     borderRadius: "20px",
     buttonColor: "#EFEEEE ",
-    // border: 'none'
   },
 };
 

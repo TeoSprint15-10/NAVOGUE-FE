@@ -2,6 +2,7 @@ import { S } from "./style";
 import Button from "../Button";
 import useInput from "../../hooks/useInput";
 import useCreateMemo from "../../hooks/useCreateMemo";
+
 export default function MemoInputBox() {
   const { value, onChange } = useInput();
   const { postMemo } = useCreateMemo();

@@ -10,6 +10,7 @@ import SelectedContentModal from "../../SelectedContent/SelectedContentModal";
 import { ModalPortal } from "../../ModalPortal/ModalPortal";
 import useModal from "../../../hooks/useModal";
 import { useState } from "react";
+import useInput from "../../../hooks/useInput";
 
 interface CardWrapperProps {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ interface CardWrapperProps {
 export default function CardWrapper({ children, card }: CardWrapperProps) {
   const { modalOpen, openModal, closeModal } = useModal();
   const [showDeleteButton, setShowDeleteButton] = useState(false);
+  const { value, onChange } = useInput();
 
   const handleDotClick = () => {
     setShowDeleteButton(true);
@@ -37,18 +39,24 @@ export default function CardWrapper({ children, card }: CardWrapperProps) {
           <Dot onClick={handleDotClick} />
         )}
       </S.MenuWrapper>
-      <S.Content onClick={openModal}>{card.content}</S.Content>
+      {showDeleteButton ? (
+        <S.ModifyTextArea value={value} placeholder={"대기"} />
+      ) : (
+        <S.Content onClick={openModal}>{card.content}</S.Content>
+      )}
       <S.TagWrapper>
-        {card.tags.map((e, idx) => (
-          <S.buttonWrapper key={idx}>
-            <Button type="TAG" text={e.name} />
-            {showDeleteButton && <S.deleteBtn />}
-          </S.buttonWrapper>
-        ))}
-        <S.buttonWrapper>
+        <S.TagsBtnWrapper>
+          {card.tags.map((e, idx) => (
+            <S.ModifyBtnWrapper1 key={idx}>
+              <Button type="TAG" text={e.name} />
+              {showDeleteButton && <S.DeleteBtn />}
+            </S.ModifyBtnWrapper1>
+          ))}
+        </S.TagsBtnWrapper>
+        <S.ModifyBtnWrapper2>
           <Button type="TAG_ADD" text={"..."} />
-          {showDeleteButton && <S.addTagBtn />}
-        </S.buttonWrapper>
+          {showDeleteButton && <S.AddTagBtn />}
+        </S.ModifyBtnWrapper2>
       </S.TagWrapper>
       <ModalPortal>
         <SelectedContentModal

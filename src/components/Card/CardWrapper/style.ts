@@ -10,6 +10,7 @@ const Container = styled.div`
   padding: 10px;
   margin-right: 50px;
   margin-bottom: 50px;
+  overflow-y: hidden;
 `;
 
 const MenuWrapper = styled.div`
@@ -33,19 +34,40 @@ const Content = styled.div`
   background-color: white;
   cursor: pointer;
 `;
+const ModifyTextArea = styled.textarea`
+  width: 100%;
+  height: 150px;
+  background-color: white;
+  border: none;
+  resize: none;
+`;
 
 const TagWrapper = styled.div`
   margin-top: 10px;
   width: 100%;
   display: flex;
+  justify-content: space-between;
   gap: 10px;
   height: 50px;
   position: relative;
-  :last-child {
-    margin-left: auto;
+`;
+const TagsBtnWrapper = styled.div`
+  overflow-x: auto;
+  overflow-y: hidden;
+  position: relative;
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  padding: 0;
+`;
+const ModifyBtnWrapper1 = styled.div`
+  position: relative;
+  gap: 10px;
+  :first-child {
+    cursor: default;
   }
 `;
-const buttonWrapper = styled.div`
+const ModifyBtnWrapper2 = styled.div`
   position: relative;
   gap: 10px;
   :first-child {
@@ -53,7 +75,7 @@ const buttonWrapper = styled.div`
   }
 `;
 
-const deleteBtn = styled.button`
+const DeleteBtn = styled.button`
   position: absolute;
   border-radius: 50%;
   border-style: none;
@@ -67,7 +89,7 @@ const deleteBtn = styled.button`
   padding: 0;
   cursor: pointer;
 `;
-const addTagBtn = styled.button`
+const AddTagBtn = styled.button`
   position: absolute;
   border-radius: 50%;
   border-style: none;
@@ -85,10 +107,13 @@ const addTagBtn = styled.button`
 export const S = {
   Container,
   MenuWrapper,
-  buttonWrapper,
   ButtonWrapper,
+  TagsBtnWrapper,
+  ModifyBtnWrapper1,
+  ModifyBtnWrapper2,
   TagWrapper,
-  deleteBtn,
-  addTagBtn,
+  DeleteBtn,
+  AddTagBtn,
   Content,
+  ModifyTextArea,
 };
