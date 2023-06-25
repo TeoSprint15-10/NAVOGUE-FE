@@ -6,8 +6,6 @@ interface UrlThumbnailProps {
 }
 
 export default function UrlThumbnail({ card }: UrlThumbnailProps) {
-  if (!card.openGraph) return null;
-
   const {
     memo: { content },
     ogImageUrl,

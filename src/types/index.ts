@@ -13,7 +13,7 @@ export type TextMemo = {
 export type UrlMemo = {
   id: number;
   contentType: UrlContentType;
-  openGraph: OpenGraph | null;
+  openGraph: OpenGraph;
   isPinned: boolean;
   tags: Tag[];
   createAt: string;

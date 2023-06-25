@@ -40,7 +40,7 @@ export const TagWrapper = styled.div`
   bottom: 0;
   margin-top: 10px;
   width: 100%;
-  height: 50px;
+  height: 40px;
   display: flex;
   align-items: center;
   gap: 4px;

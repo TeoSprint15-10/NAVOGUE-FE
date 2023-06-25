@@ -24,7 +24,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
         <Dot />
       </S.MenuWrapper>
 
-      {isTextMemo(card) && (
+      {card && isTextMemo(card) && (
         <>
           <S.TextMemoContentWrapper onClick={openModal}>
             {card.content}
@@ -46,7 +46,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
       )}
 
       <S.TagWrapper>
-        {card.tags.map((tag, idx) => (
+        {card.tags.slice(0, 3).map((tag, idx) => (
           <Button type="TAG" text={tag} key={idx} />
         ))}
       </S.TagWrapper>
