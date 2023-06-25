@@ -23,7 +23,7 @@ interface CardWrapperProps {
 }
 
 export default function CardWrapper({ card }: CardWrapperProps) {
-  // console.log(card);
+  console.log(card);
 
   const { modalOpen, openModal, closeModal } = useModal();
   const queryClient = useQueryClient();
