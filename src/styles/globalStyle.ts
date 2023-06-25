@@ -21,6 +21,12 @@ const GlobalStyles = createGlobalStyle`
       margin: 0 auto;
       height: 100%;
     }
+
+    a, a:hover, a:visited, a:link, a:active {
+      text-decoration: none;
+      color: inherit;
+
+    }
 `;
 
 export default GlobalStyles;

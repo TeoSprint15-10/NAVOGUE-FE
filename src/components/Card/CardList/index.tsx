@@ -1,14 +1,12 @@
 import * as S from "./style";
 import CardWrapper from "../CardWrapper";
-import { Memo } from "../../../types";
+import { TextMemo, UrlMemo } from "../../../types";
 
 interface CardListProps {
-  cardList: Memo[] | undefined;
+  cardList: (TextMemo | UrlMemo)[] | undefined;
 }
 
 export default function CardList({ cardList }: CardListProps) {
-  console.log(cardList);
-
   return (
     <S.CardListWrapper>
       {cardList?.map((card, idx) => (
