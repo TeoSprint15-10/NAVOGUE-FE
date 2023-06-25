@@ -5,15 +5,15 @@ interface UrlThumbnailProps {
   card: UrlMemo;
 }
 
-export default function UrlThumbnail({
-  card: {
-    openGraph: {
-      memo: { content },
-      ogImageUrl,
-      ogTitle,
-    },
-  },
-}: UrlThumbnailProps) {
+export default function UrlThumbnail({ card }: UrlThumbnailProps) {
+  if (!card.openGraph) return null;
+
+  const {
+    memo: { content },
+    ogImageUrl,
+    ogTitle,
+  } = card.openGraph;
+
   return (
     <S.Container to={content}>
       <S.ThumbnailImg src={ogImageUrl} />
