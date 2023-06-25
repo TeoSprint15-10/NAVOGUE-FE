@@ -9,6 +9,7 @@ import { PATH_NAME } from "./constants/route";
 import GlobalStyle from "./styles/globalStyle";
 import { RecoilRoot } from "recoil";
 import { MemoProvider } from "./context/MemoContext";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 function App() {
   const queryClient = new QueryClient({
@@ -36,6 +37,7 @@ function App() {
         </MemoProvider>
       </QueryClientProvider>
     </RecoilRoot>
+
   );
 }
 

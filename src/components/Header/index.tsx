@@ -14,6 +14,7 @@ export default function Header() {
 
   const handleSearch = async (): Promise<void> => {
     setFilterInfo({ triggerType: "keyword", target: searchQuery });
+
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
