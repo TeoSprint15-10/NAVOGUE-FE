@@ -8,6 +8,7 @@ const Container = styled.div`
   flex-direction: column;
   border-radius: 20px;
   padding: 20px;
+  margin-bottom: 40px;
 `;
 
 const TextArea = styled.textarea`

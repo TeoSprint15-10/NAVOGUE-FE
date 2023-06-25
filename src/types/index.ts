@@ -35,3 +35,8 @@ type OpenGraph = {
 };
 
 export type Tag = string;
+
+export type MemoTagListData = {
+  memoId: string;
+  tagNames: string[];
+};
