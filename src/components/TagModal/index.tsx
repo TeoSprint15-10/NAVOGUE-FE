@@ -3,7 +3,8 @@ import * as S from "./style";
 import Button from "../Button";
 import { createTags } from "../../api/tag";
 import { filterDuplicateElements } from "../../utils/filterDuplicateElements";
-
+import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { QUERY_KEY } from "../../constants/key";
 interface TagModalProps {
   memoId: string;
   tagNames: string[];
@@ -11,20 +12,15 @@ interface TagModalProps {
   handleModalClose: () => void;
 }
 
-export default function TagModal({
-  memoId,
-  tagNames,
-  isOpened,
-  handleModalClose,
-}: TagModalProps) {
+export default function TagModal({ memoId, tagNames, isOpened, handleModalClose }: TagModalProps) {
+  const queryClient = useQueryClient();
   const filteredTags = filterDuplicateElements(tagNames);
   const [inputValue, setInputValue] = useState("");
   const [tags, setTags] = useState(filteredTags);
   const [isDuplicateTag, setIsDuplicateTag] = useState(false);
 
   useEffect(() => {
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
     document.body.style.paddingRight = `${scrollbarWidth}px`;
 
@@ -33,6 +29,19 @@ export default function TagModal({
       document.body.style.paddingRight = "";
     };
   }, []);
+
+  const { mutate: create } = useMutation(createTags, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries([QUERY_KEY.TAG_LIST]);
+      queryClient.invalidateQueries([QUERY_KEY.MEMO_LIST]);
+
+      console.log(data);
+    },
+    onError: (data) => {
+      console.log(data);
+    },
+  });
+  // 수정 버튼
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(e.target.value);
@@ -56,11 +65,22 @@ export default function TagModal({
     if (newTags.length === 0) {
       return;
     }
-    await createTags({ memoId, tagNames: newTags });
+    await create({ memoId, tagNames: newTags });
     setInputValue("");
     setIsDuplicateTag(false);
     handleModalClose();
   };
+
+  // const handleSaveTags = async (): Promise<void> => {
+  //   const newTags = tags.filter((tag) => !tagNames.includes(tag));
+  //   if (newTags.length === 0) {
+  //     return;
+  //   }
+  //   await createTags({ memoId, tagNames: newTags });
+  //   setInputValue("");
+  //   setIsDuplicateTag(false);
+  //   handleModalClose();
+  // };
 
   return (
     <>
@@ -74,9 +94,7 @@ export default function TagModal({
                 <S.ModalInput onChange={handleInputChange} value={inputValue} />
                 <S.ModalAddButton type="submit">추가</S.ModalAddButton>
               </S.ModalForm>
-              <S.DuplicateTagMessage>
-                {isDuplicateTag ? "중복된 태그가 있습니다." : ""}
-              </S.DuplicateTagMessage>
+              <S.DuplicateTagMessage>{isDuplicateTag ? "중복된 태그가 있습니다." : ""}</S.DuplicateTagMessage>
             </S.ModalInputBar>
           </S.ModalInputWrapper>
           <S.ModalTagWrapper>
@@ -85,9 +103,7 @@ export default function TagModal({
             ))}
           </S.ModalTagWrapper>
           <S.ModalButtonWrapper>
-            <S.ModalSubmitButton onClick={handleSaveTags}>
-              저장
-            </S.ModalSubmitButton>
+            <S.ModalSubmitButton onClick={handleSaveTags}>저장</S.ModalSubmitButton>
           </S.ModalButtonWrapper>
         </S.Wrapper>
       )}
