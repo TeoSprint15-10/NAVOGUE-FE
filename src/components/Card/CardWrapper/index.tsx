@@ -123,7 +123,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
       )}
       <S.TagWrapper>
         <S.TagsBtnWrapper>
-          {card.tags.slice(0, 3).map((tag, idx) => (
+          {card.tags.map((tag, idx) => (
             <S.ModifyBtnWrapper1>
               <Button type="TAG" text={tag} key={idx} />
               {showDeleteButton && <S.DeleteBtn />}

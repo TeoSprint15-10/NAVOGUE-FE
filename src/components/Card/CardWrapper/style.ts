@@ -30,45 +30,41 @@ export const Content = styled.div`
 
 export const ModifyTextArea = styled.textarea`
   width: 100%;
-  height: 150px;
+  height: 120px;
   background-color: white;
+  margin-top: 10px;
   border: none;
   resize: none;
 `;
 
-// export const TagWrapper = styled.div`
-//   position: absolute;
-//   bottom: 0;
-//   margin-top: 10px;
-//   width: 100%;
-//   height: 40px;
-//   display: flex;
-//   align-items: center;
-//   gap: 4px;
-// `;
-
 export const TagWrapper = styled.div`
   position: absolute;
   bottom: 0;
+  left: 0;
   margin-top: 10px;
   width: 100%;
   height: 40px;
   display: flex;
   justify-content: space-between;
   gap: 4px;
-  /* border: 2px solid black; */
+  padding-right: 40px;
+  box-sizing: border-box;
 `;
 
 export const TagsBtnWrapper = styled.div`
-  /* overflow-x: auto; */
   overflow-y: hidden;
   position: relative;
   display: flex;
   gap: 10px;
   width: 100%;
-  padding: 0;
-  /* border: 2px solid red; */
+  height: 50px;
+  /* padding: 10px 0; */
+  /* box-sizing: border-box;
+  &::-webkit-scrollbar {
+    display: none;
+  } */
 `;
+
 export const ModifyBtnWrapper1 = styled.div`
   position: relative;
   gap: 10px;
@@ -76,11 +72,12 @@ export const ModifyBtnWrapper1 = styled.div`
     cursor: default;
   }
 `;
+
 export const ModifyBtnWrapper2 = styled.div`
-  position: relative;
-  right: 20px;
+  position: absolute;
+  right: 0;
   gap: 10px;
-  border: 1px solid green;
+  /* border: 1px solid green; */
   :first-child {
     cursor: default;
   }
@@ -100,6 +97,7 @@ export const DeleteBtn = styled.button`
   padding: 0;
   cursor: pointer;
 `;
+
 export const AddTagBtn = styled.button`
   position: absolute;
   border-radius: 50%;
@@ -130,7 +128,6 @@ export const TextMemoContentWrapper = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* border:  5px solid blue; */
 `;
 
 export const UrlMemoContentWrapper = styled.div`
@@ -143,4 +140,3 @@ export const UrlMemoContentWrapper = styled.div`
 export const BookMarkWrapper = styled.div`
   cursor: pointer;
 `;
-
