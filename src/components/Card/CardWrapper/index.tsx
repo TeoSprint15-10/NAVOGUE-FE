@@ -17,6 +17,7 @@ import { QUERY_KEY } from "../../../constants/key";
 import { useState } from "react";
 import useInput from "../../../hooks/useInput";
 import { modifyMemo } from "../../../api/memo";
+import { useTogglePinMemo } from "../../../hooks/useTogglePinMemo";
 
 interface CardWrapperProps {
   card: TextMemo | UrlMemo;
@@ -24,7 +25,9 @@ interface CardWrapperProps {
 
 export default function CardWrapper({ card }: CardWrapperProps) {
   const { modalOpen, openModal, closeModal } = useModal();
+
   const queryClient = useQueryClient();
+
   const { mutate: del } = useMutation(deleteMemo, {
     onSuccess: (data) => {
       queryClient.invalidateQueries([QUERY_KEY.MEMO_LIST]);
@@ -51,11 +54,20 @@ export default function CardWrapper({ card }: CardWrapperProps) {
     del(card.id);
     console.log("hello");
   };
+
+  const { mutate } = useTogglePinMemo(card.id);
+
+  const ontogglePinMemo = () => {
+    mutate();
+  };
+
   return (
     // <S.Container onClick={handleDelete}>
     <S.Container>
       <S.MenuWrapper>
-        {card.isPinned ? <BookmarkFilled /> : <Bookmark />}
+        <div onClick={ontogglePinMemo}>
+          {card.pinned ? <BookmarkFilled /> : <Bookmark />}
+        </div>
         {showDeleteButton ? (
           <S.ButtonWrapper>
             <Button type="TAG" text={"삭제"} />
