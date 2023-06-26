@@ -17,14 +17,13 @@ const Router = () => {
           path={PATH_NAME.LOGIN}
           element={isLogin ? <MainPage /> : <LoginPage />}
         />
-        <Route
-          path={PATH_NAME.MAIN}
-          element={isLogin ? <MainPage /> : <LoginPage />}
-        />
+        <Route path={PATH_NAME.MAIN} element={<MainPage />} />
+        {/*
         <Route
           path={PATH_NAME.KAKAOCALLBACK}
           element={isLogin ? <MainPage /> : <KakaoCallback />}
         />
+        */}
         <Route path={PATH_NAME.NOT_FOUND} element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

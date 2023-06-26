@@ -2,8 +2,6 @@ import { TextMemo, UrlMemo } from "../../../types";
 import { ReactComponent as BookmarkFilled } from "../../../../public/assets/bookmarkFilled.svg";
 import { ReactComponent as Bookmark } from "../../../../public/assets/bookmark.svg";
 import { ReactComponent as Dot } from "../../../../public/assets/dot.svg";
-import DeleteMemoButton from "../../../../public/assets/deleteMemoButton.png";
-import addTagButton from "../../../../public/assets/addTagButton.png";
 import Button from "../../Button";
 import SelectedContentModal from "../../SelectedContent/SelectedContentModal";
 import { ModalPortal } from "../../ModalPortal/ModalPortal";
@@ -19,6 +17,7 @@ import useInput from "../../../hooks/useInput";
 import { modifyMemo } from "../../../api/memo";
 import TagModal from "../../TagModal";
 import { useTogglePinMemo } from "../../../hooks/useTogglePinMemo";
+import { deleteTag } from "../../../api/tag";
 
 interface CardWrapperProps {
   card: TextMemo | UrlMemo;
@@ -32,7 +31,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
     closeModal: handleModalClose,
   } = useModal();
   const [showDeleteButton, setShowDeleteButton] = useState(false);
-  const { value: content, onChange: onContentChange} = useInput(card.content);
+  const { value: content, onChange: onContentChange } = useInput(card.content);
   console.log(content);
 
   // queryClient logic
@@ -56,10 +55,21 @@ export default function CardWrapper({ card }: CardWrapperProps) {
       console.log(data);
     },
   });
+
+  const { mutate: tagDel } = useMutation(deleteTag, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries([QUERY_KEY.MEMO_LIST]);
+      console.log(data);
+    },
+    onError: (data) => {
+      console.log(data);
+    },
+  });
+
   // 수정 버튼 click event
   const handleDotClick = () => {
     setShowDeleteButton(true);
-    onContentChange({ target: { value: card.content } });
+    //onContentChange({ target: { value: card.content } });
   };
   // 수정완료 버튼 click event
   const handleModify = () => {
@@ -69,15 +79,18 @@ export default function CardWrapper({ card }: CardWrapperProps) {
 
   // 메모 삭제 버튼 click event
   const handleDelete = () => {
-    console.log(card.id);
     setShowDeleteButton(false);
     del(card.id);
-    console.log("hello");
   };
 
   const { mutate } = useTogglePinMemo(card.id);
   const ontogglePinMemo = () => {
     mutate();
+  };
+
+  //태그 삭제 구현
+  const handleTagDelete = (memoId: string, tagName: string) => {
+    tagDel({ memoId, tagName });
   };
 
   return (
@@ -110,7 +123,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
                   close={closeModal}
                   header="전체보기"
                   card={card}
-                ></SelectedContentModal>
+                />
               </ModalPortal>
             </>
           )}
@@ -126,13 +139,17 @@ export default function CardWrapper({ card }: CardWrapperProps) {
           {card.tags.slice(0, 3).map((tag, idx) => (
             <S.ModifyBtnWrapper1>
               <Button type="TAG" text={tag} key={idx} />
-              {showDeleteButton && <S.DeleteBtn />}
+              {showDeleteButton && (
+                <S.DeleteBtn
+                  onClick={() => handleTagDelete(card.id + "", tag)}
+                />
+              )}
             </S.ModifyBtnWrapper1>
           ))}
         </S.TagsBtnWrapper>
         <S.ModifyBtnWrapper2>
-          <Button type="TAG_ADD" text={"…"} />
-          {showDeleteButton && <S.AddTagBtn onClick={handleModalOpen} />}
+          <Button type="TAG_ADD" text={"…"} onClick={handleModalOpen} />
+          {showDeleteButton && <S.AddTagBtn />}
         </S.ModifyBtnWrapper2>
         <ModalPortal>
           <TagModal
@@ -140,7 +157,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
             tagNames={card.tags}
             isOpened={isOpened}
             handleModalClose={handleModalClose}
-          ></TagModal>
+          />
         </ModalPortal>
       </S.TagWrapper>
     </S.Container>
