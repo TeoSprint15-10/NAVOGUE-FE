@@ -35,6 +35,7 @@ function App() {
             </BrowserRouter>
           </Layout>
         </MemoProvider>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </RecoilRoot>
   );
