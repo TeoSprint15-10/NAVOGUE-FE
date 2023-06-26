@@ -23,8 +23,6 @@ interface CardWrapperProps {
 }
 
 export default function CardWrapper({ card }: CardWrapperProps) {
-  // console.log(card);
-
   const { modalOpen, openModal, closeModal } = useModal();
   const queryClient = useQueryClient();
   const { mutate: del } = useMutation(deleteMemo, {
@@ -37,11 +35,15 @@ export default function CardWrapper({ card }: CardWrapperProps) {
     },
   });
   const [showDeleteButton, setShowDeleteButton] = useState(false);
-  const { value, onChange } = useInput();
+  const { value: content, onChange: onContentChange } = useInput();
+  console.log(content);
 
   const handleDotClick = () => {
     setShowDeleteButton(true);
-    modifyMemo({ content: "test", id: 12 });
+    onContentChange({ target: { value: card.content } });
+  };
+  const handleModify = () => {
+    modifyMemo({ content, id: card.id });
   };
   const handleDelete = () => {
     console.log(card.id);
@@ -57,14 +59,14 @@ export default function CardWrapper({ card }: CardWrapperProps) {
         {showDeleteButton ? (
           <S.ButtonWrapper>
             <Button type="TAG" text={"삭제"} />
-            <Button type="TAG" text={"완료"} />
+            <Button type="TAG" text={"완료"} onClick={handleModify} />
           </S.ButtonWrapper>
         ) : (
           <Dot onClick={handleDotClick} />
         )}
       </S.MenuWrapper>
       {showDeleteButton ? (
-        <S.ModifyTextArea value={"잠시"} placeholder={"대기"} />
+        <S.ModifyTextArea value={content} onChange={onContentChange} />
       ) : (
         <>
           {card && isTextMemo(card) && (
@@ -99,7 +101,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
           ))}
         </S.TagsBtnWrapper>
         <S.ModifyBtnWrapper2>
-          <Button type="TAG_ADD" text={"..."} />
+          <Button type="TAG_ADD" text={"…"} />
           {showDeleteButton && <S.AddTagBtn />}
         </S.ModifyBtnWrapper2>
       </S.TagWrapper>
