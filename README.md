@@ -124,3 +124,10 @@ NA:VOGUE: 는 태그별로 정리되어 쉽게 찾아볼 수 있도록 돕습니
 
 ## 7. 키워드 검색
     키워드 검색으로 나의 메모를 쉽게 찾을 수 있어요
+    
+## 우리는 이렇게 작업했어요
+![](https://github.com/TeoSprint15-10/NAVOGUE-BE/assets/92250144/43817ed1-64c8-4ac4-bf81-5d2f8ba870c1)
+
+
+### NAVOGUE-erd
+![](https://github.com/TeoSprint15-10/NAVOGUE-BE/assets/92250144/2102522a-f60b-46bb-8cbd-9fc768494947)
