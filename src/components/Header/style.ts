@@ -25,11 +25,11 @@ export const Box = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  top: 50px;
+  top: 60px;
   width: 80%;
-  height: 100px;
+  height: 80px;
   background-color: #f7f8f9;
-  border: 4px solid #a0c9a2;
+  border: 3px solid #a0c9a2;
   border-radius: 50px;
 `;
 
@@ -49,14 +49,15 @@ export const LogoTextImg = styled.img``;
 export const SearchInput = styled.input`
   width: 60%;
   background-color: #f0f3f0;
+  color: #536e55;
   border: none;
   border-radius: 20px;
-  height: 65%;
+  height: 60%;
   padding: 10px 10px 10px 20px;
-  font-size: 30px;
+  font-size: 20px;
   margin-right: 110px;
   &:focus {
-    caret-color: #f0f3f0;
+    caret-color: #a0c9a2;
     outline: none;
   }
 `;
@@ -68,14 +69,19 @@ export const SearchBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  top: -4px;
-  right: -4px;
-  border: 4px solid #a0c9a2;
+  top: -3px;
+  right: -3px;
+  border: 3px solid #a0c9a2;
   background-color: #a0c9a2;
-  width: 100px;
+  width: 80px;
   height: 100%;
   border-radius: 50%;
   margin-left: 10px;
+`;
+
+export const SearchIcon = styled.img`
+  width: 40%;
+  height: 40%;
 `;
 
 export const loginImg = styled.img`
@@ -89,5 +95,3 @@ export const loginImg = styled.img`
   z-index: 1;
   cursor: pointer;
 `;
-
-export const SearchIcon = styled.img``;
