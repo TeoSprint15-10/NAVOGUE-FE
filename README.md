@@ -69,13 +69,11 @@ NA:VOGUE: 는 태그별로 정리되어 쉽게 찾아볼 수 있도록 돕습니
 
 **Language |** Java 17
 
-**Framework |** Spring 5.3.21 (Spring Boot 2.7.1, Spring MVC 5.3.21)
+**Framework |** Spring Boot 3.1.1
 
-**Data(RDBMS) |** JPA Hibernate 5.6.9 (Spring Data JPA 2.7.1)
+**Data(RDBMS) |** JPA Hibernate 2.2.1 (Spring Data JPA 3.1.1)
 
-**Build Tool |** Gradle 7.4.1
-
-**Docs |** Spring REST Docs 2.0.6
+**Build Tool |** Gradle 8.1.1
 
 </div>
 
