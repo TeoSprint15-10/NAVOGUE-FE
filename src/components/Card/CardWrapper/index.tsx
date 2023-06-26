@@ -16,15 +16,17 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { QUERY_KEY } from "../../../constants/key";
 import { useState, useEffect } from "react";
 import useInput from "../../../hooks/useInput";
+import { useTogglePinMemo } from "../../../hooks/useTogglePinMemo";
 
 interface CardWrapperProps {
   card: TextMemo | UrlMemo;
 }
 
 export default function CardWrapper({ card }: CardWrapperProps) {
-
   const { modalOpen, openModal, closeModal } = useModal();
+
   const queryClient = useQueryClient();
+
   const { mutate: del } = useMutation(deleteMemo, {
     onSuccess: (data) => {
       queryClient.invalidateQueries([QUERY_KEY.MEMO_LIST]);
@@ -52,18 +54,18 @@ export default function CardWrapper({ card }: CardWrapperProps) {
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const { value, onChange, setValue } = useInput(card.content);
 
-
   // 메모 삭제시 state 갱신
   useEffect(() => {
     setValue(card.content);
   }, [card]);
   const handleDotClick = () => {
     setShowDeleteButton(true);
+  };
 
   const handleModify = () => {
     modifyMemo({ content, id: card.id });
-
   };
+
   // 메모 삭제
   const handleDelete = (id: number) => {
     del(id);
@@ -80,30 +82,45 @@ export default function CardWrapper({ card }: CardWrapperProps) {
     onChange(e); // useInput 커스텀 훅에 전달
   };
 
+  const { mutate } = useTogglePinMemo(card.id);
+
+  const ontogglePinMemo = () => {
+    mutate();
+  };
+
   return (
     // <S.Container onClick={handleDelete}>
     <S.Container>
       <S.MenuWrapper>
-        {card.isPinned ? <BookmarkFilled /> : <Bookmark />}
+        <S.BookMarkWrapper onClick={ontogglePinMemo}>
+          {card.pinned ? <BookmarkFilled /> : <Bookmark />}
+        </S.BookMarkWrapper>
         {showDeleteButton ? (
           <S.ButtonWrapper>
-
-            <Button type="TAG" text={"삭제"} onClick={() => handleDelete(card.id)} />
+            <Button
+              type="TAG"
+              text={"삭제"}
+              onClick={() => handleDelete(card.id)}
+            />
             <Button type="TAG" text={"완료"} onClick={handleModify} />
-
           </S.ButtonWrapper>
         ) : (
           <Dot onClick={handleDotClick} />
         )}
       </S.MenuWrapper>
       {showDeleteButton ? (
-        <S.ModifyTextArea value={value} onChange={handleChange} placeholder={"대기"} />
-
+        <S.ModifyTextArea
+          value={value}
+          onChange={handleChange}
+          placeholder={"대기"}
+        />
       ) : (
         <>
           {card && isTextMemo(card) && (
             <>
-              <S.TextMemoContentWrapper onClick={openModal}>{card.content}</S.TextMemoContentWrapper>
+              <S.TextMemoContentWrapper onClick={openModal}>
+                {card.content}
+              </S.TextMemoContentWrapper>
               <ModalPortal>
                 <SelectedContentModal
                   open={modalOpen}
