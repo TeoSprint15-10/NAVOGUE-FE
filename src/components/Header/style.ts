@@ -78,4 +78,16 @@ export const SearchBtn = styled.div`
   margin-left: 10px;
 `;
 
+export const loginImg = styled.img`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  cursor: pointer;
+`;
+
 export const SearchIcon = styled.img``;

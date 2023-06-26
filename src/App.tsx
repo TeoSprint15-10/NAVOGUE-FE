@@ -11,10 +11,17 @@ import { RecoilRoot } from "recoil";
 import { MemoProvider } from "./context/MemoContext";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
+const getToken = () => {
+  const token = localStorage.getItem("token");
+  return token;
+};
+
 function App() {
   const queryClient = new QueryClient({
     defaultOptions: {},
   });
+
+  const token = getToken();
 
   return (
     <RecoilRoot>
@@ -24,12 +31,16 @@ function App() {
           <Layout>
             <BrowserRouter>
               <Routes>
-                <Route path={PATH_NAME.LOGIN} element={<LoginPage />} />
                 {/* <Route
-                path={PATH_NAME.KAKAOCALLBACK}
-                element={<KakaoCallback />}
-              /> */}
+                  path={PATH_NAME.LOGIN}
+                  element={token ? <MainPage /> : <LoginPage />}
+                /> */}
+                <Route path={PATH_NAME.LOGIN} element={<LoginPage />} />
                 <Route path={PATH_NAME.MAIN} element={<MainPage />} />
+                <Route
+                  path={PATH_NAME.KAKAOCALLBACK}
+                  element={<KakaoCallback />}
+                />
                 <Route path={PATH_NAME.NOT_FOUND} element={<NotFoundPage />} />
               </Routes>
             </BrowserRouter>

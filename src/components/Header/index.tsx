@@ -7,6 +7,7 @@ import { getMemoSearchedList } from "../../api/memo";
 import { MemoContext } from "../../context/MemoContext";
 import { useRecoilState } from "recoil";
 import { filterState } from "../../recoil/atoms/filterState";
+import LogoImageUrl from "../../../public/assets/LoginLogo.png";
 
 export default function Header() {
   const [filterInfo, setFilterInfo] = useRecoilState(filterState);
@@ -14,7 +15,6 @@ export default function Header() {
 
   const handleSearch = async (): Promise<void> => {
     setFilterInfo({ triggerType: "keyword", target: searchQuery });
-
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -23,6 +23,7 @@ export default function Header() {
 
   return (
     <S.Wrapper>
+      <S.loginImg src={LogoImageUrl} alt="LogoImageUrl"></S.loginImg>
       <S.Overlay />
       <S.Box>
         <S.Logo>
