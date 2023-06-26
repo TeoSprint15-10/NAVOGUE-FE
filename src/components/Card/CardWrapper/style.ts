@@ -139,3 +139,8 @@ export const UrlMemoContentWrapper = styled.div`
   height: 165px;
   cursor: pointer;
 `;
+
+export const BookMarkWrapper = styled.div`
+  cursor: pointer;
+`;
+

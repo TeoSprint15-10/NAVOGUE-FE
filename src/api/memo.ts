@@ -54,4 +54,17 @@ const modifyMemo = async (modifyData: ModifyMemo) => {
   return response.data;
 };
 
-export { getMemoList, getMemoSearchedList, createMemo, deleteMemo, modifyMemo };
+const togglePinMemo = async (memoId: number) => {
+  const response = await axiosWithAccessToken.patch(`/memo/pin/${memoId}`);
+
+  return response.data;
+};
+
+export {
+  getMemoList,
+  getMemoSearchedList,
+  createMemo,
+  deleteMemo,
+  modifyMemo,
+  togglePinMemo,
+};

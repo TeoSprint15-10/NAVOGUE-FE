@@ -17,6 +17,9 @@ import { QUERY_KEY } from "../../../constants/key";
 import { useState } from "react";
 import useInput from "../../../hooks/useInput";
 import { modifyMemo } from "../../../api/memo";
+import TagModal from "../../TagModal";
+import { useTogglePinMemo } from "../../../hooks/useTogglePinMemo";
+
 
 interface CardWrapperProps {
   card: TextMemo | UrlMemo;
@@ -24,11 +27,20 @@ interface CardWrapperProps {
 
 export default function CardWrapper({ card }: CardWrapperProps) {
   const { modalOpen, openModal, closeModal } = useModal();
+  const {
+    modalOpen: isOpened,
+    openModal: handleModalOpen,
+    closeModal: handleModalClose,
+  } = useModal();
+
+
   const queryClient = useQueryClient();
+
   const { mutate: del } = useMutation(deleteMemo, {
     onSuccess: (data) => {
       queryClient.invalidateQueries([QUERY_KEY.MEMO_LIST]);
       console.log(data);
+
     },
     onError: (data) => {
       console.log(data);
@@ -53,6 +65,24 @@ export default function CardWrapper({ card }: CardWrapperProps) {
   };
 
 const handleModify = () => {
+  const { value, onChange, setValue } = useInput(card.content);
+
+  // 메모 삭제시 state 갱신
+  useEffect(() => {
+    setValue(card.content);
+  }, [card]);
+  const handleDotClick = () => {
+    setShowDeleteButton(true);
+    //onContentChange({ target: { value: card.content } });
+  };
+
+  const handleModify = () => {
+    modifyMemo({ content, id: card.id });
+  };
+
+  // 메모 삭제
+  const handleDelete = (id: number) => {
+    del(id);
     setShowDeleteButton(false);
     modify({ content, id: card.id });
   };
@@ -64,11 +94,18 @@ const handleModify = () => {
     del(card.id);
     console.log("hello");
   };
+
+  const { mutate } = useTogglePinMemo(card.id);
+  const ontogglePinMemo = () => {
+    mutate();
+  };
+
   return (
-    // <S.Container onClick={handleDelete}>
     <S.Container>
       <S.MenuWrapper>
-        {card.isPinned ? <BookmarkFilled /> : <Bookmark />}
+        <S.BookMarkWrapper onClick={ontogglePinMemo}>
+          {card.pinned ? <BookmarkFilled /> : <Bookmark />}
+        </S.BookMarkWrapper>
         {showDeleteButton ? (
           <S.ButtonWrapper>
             <Button type="TAG" text={"삭제"} onClick={handleDelete} />
@@ -80,6 +117,11 @@ const handleModify = () => {
       </S.MenuWrapper>
       {showDeleteButton ? (
         <S.ModifyTextArea value={content} onChange={onContentChange} />
+        <S.ModifyTextArea
+          value={value}
+          onChange={handleChange}
+          placeholder={"대기"}
+        />
       ) : (
         <>
           {card && isTextMemo(card) && (
@@ -115,8 +157,16 @@ const handleModify = () => {
         </S.TagsBtnWrapper>
         <S.ModifyBtnWrapper2>
           <Button type="TAG_ADD" text={"…"} />
-          {showDeleteButton && <S.AddTagBtn />}
+          {showDeleteButton && <S.AddTagBtn onClick={handleModalOpen} />}
         </S.ModifyBtnWrapper2>
+        <ModalPortal>
+          <TagModal
+            memoId={card.id + ""}
+            tagNames={card.tags}
+            isOpened={isOpened}
+            handleModalClose={handleModalClose}
+          ></TagModal>
+        </ModalPortal>
       </S.TagWrapper>
     </S.Container>
   );
