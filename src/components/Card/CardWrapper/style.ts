@@ -58,11 +58,10 @@ export const TagsBtnWrapper = styled.div`
   gap: 10px;
   width: 100%;
   height: 50px;
-  /* padding: 10px 0; */
-  /* box-sizing: border-box;
+  box-sizing: border-box;
   &::-webkit-scrollbar {
     display: none;
-  } */
+  }
 `;
 
 export const ModifyBtnWrapper1 = styled.div`
@@ -71,6 +70,7 @@ export const ModifyBtnWrapper1 = styled.div`
   :first-child {
     cursor: default;
   }
+  padding-top: 2px;
 `;
 
 export const ModifyBtnWrapper2 = styled.div`
@@ -93,7 +93,7 @@ export const DeleteBtn = styled.button`
   width: 15px;
   height: 15px;
   right: 0;
-  top: -5px;
+  top: 0px;
   padding: 0;
   cursor: pointer;
 `;
