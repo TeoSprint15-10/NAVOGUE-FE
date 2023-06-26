@@ -16,7 +16,8 @@ const KakaoCallback = () => {
         console.log(res.data.accessToken);
         const data = res.data.accessToken;
         localStorage.setItem("token", JSON.stringify(data));
-        window.location.href = "http://localhost:5173";
+        window.location.href =
+          "https://main--gleeful-kulfi-17f59b.netlify.app/oauth";
       })
       .catch((error) => {
         console.error("API 요청 에러", error.response);
