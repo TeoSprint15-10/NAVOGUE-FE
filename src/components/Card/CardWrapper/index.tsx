@@ -22,8 +22,6 @@ interface CardWrapperProps {
 }
 
 export default function CardWrapper({ card }: CardWrapperProps) {
-  // console.log(card, "1");
-  console.log(card);
 
   const { modalOpen, openModal, closeModal } = useModal();
   const queryClient = useQueryClient();
@@ -54,12 +52,17 @@ export default function CardWrapper({ card }: CardWrapperProps) {
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const { value, onChange, setValue } = useInput(card.content);
 
+
   // 메모 삭제시 state 갱신
   useEffect(() => {
     setValue(card.content);
   }, [card]);
   const handleDotClick = () => {
     setShowDeleteButton(true);
+
+  const handleModify = () => {
+    modifyMemo({ content, id: card.id });
+
   };
   // 메모 삭제
   const handleDelete = (id: number) => {
@@ -84,8 +87,10 @@ export default function CardWrapper({ card }: CardWrapperProps) {
         {card.isPinned ? <BookmarkFilled /> : <Bookmark />}
         {showDeleteButton ? (
           <S.ButtonWrapper>
+
             <Button type="TAG" text={"삭제"} onClick={() => handleDelete(card.id)} />
-            <Button type="TAG" text={"완료"} onClick={handleUpdateMemo} />
+            <Button type="TAG" text={"완료"} onClick={handleModify} />
+
           </S.ButtonWrapper>
         ) : (
           <Dot onClick={handleDotClick} />
@@ -93,6 +98,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
       </S.MenuWrapper>
       {showDeleteButton ? (
         <S.ModifyTextArea value={value} onChange={handleChange} placeholder={"대기"} />
+
       ) : (
         <>
           {card && isTextMemo(card) && (
@@ -125,7 +131,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
           ))}
         </S.TagsBtnWrapper>
         <S.ModifyBtnWrapper2>
-          <Button type="TAG_ADD" text={"..."} />
+          <Button type="TAG_ADD" text={"…"} />
           {showDeleteButton && <S.AddTagBtn />}
         </S.ModifyBtnWrapper2>
       </S.TagWrapper>
