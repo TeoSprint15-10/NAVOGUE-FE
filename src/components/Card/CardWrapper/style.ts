@@ -56,16 +56,18 @@ export const TagWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 4px;
+  /* border: 2px solid black; */
 `;
 
 export const TagsBtnWrapper = styled.div`
-  overflow-x: auto;
+  /* overflow-x: auto; */
   overflow-y: hidden;
   position: relative;
   display: flex;
   gap: 10px;
   width: 100%;
   padding: 0;
+  /* border: 2px solid red; */
 `;
 export const ModifyBtnWrapper1 = styled.div`
   position: relative;
@@ -78,6 +80,7 @@ export const ModifyBtnWrapper2 = styled.div`
   position: relative;
   right: 20px;
   gap: 10px;
+  border: 1px solid green;
   :first-child {
     cursor: default;
   }
@@ -127,6 +130,7 @@ export const TextMemoContentWrapper = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  /* border:  5px solid blue; */
 `;
 
 export const UrlMemoContentWrapper = styled.div`
