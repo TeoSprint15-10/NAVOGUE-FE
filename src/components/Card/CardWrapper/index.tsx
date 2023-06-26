@@ -137,20 +137,20 @@ export default function CardWrapper({ card }: CardWrapperProps) {
       <S.TagWrapper>
         <S.TagsBtnWrapper>
           {card.tags.map((tag, idx) => (
-            <S.ModifyBtnWrapper1>
+            <S.TagDeleteBtnWrapper>
               <Button type="TAG" text={tag} key={idx} />
               {showDeleteButton && (
                 <S.DeleteBtn
                   onClick={() => handleTagDelete(card.id + "", tag)}
                 />
               )}
-            </S.ModifyBtnWrapper1>
+            </S.TagDeleteBtnWrapper>
           ))}
         </S.TagsBtnWrapper>
-        <S.ModifyBtnWrapper2>
+        <S.TagAddBtnWrapper>
           <Button type="TAG_ADD" text={"…"} onClick={handleModalOpen} />
-          {showDeleteButton && <S.AddTagBtn />}
-        </S.ModifyBtnWrapper2>
+          {/* {showDeleteButton && <S.AddTagBtn />} */}
+        </S.TagAddBtnWrapper>
         <ModalPortal>
           <TagModal
             memoId={card.id + ""}
