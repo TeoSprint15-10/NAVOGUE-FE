@@ -5,7 +5,6 @@ import GlobalStyle from "./styles/globalStyle";
 import { RecoilRoot } from "recoil";
 import { MemoProvider } from "./context/MemoContext";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
 import Router from "./routes/Router";
 
 function App() {

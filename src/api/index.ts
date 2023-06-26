@@ -11,7 +11,7 @@ const axiosWithAccessToken = Axios.create({
   baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
-    "Access-Token": localStorage.getItem("token"),
+    "Access-Token": JSON.parse(localStorage.getItem("token") || ""),
   },
 });
 

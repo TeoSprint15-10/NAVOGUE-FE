@@ -16,6 +16,8 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLogin, setIsLogin] = useRecoilState(loginState);
 
+  const navigate = useNavigate();
+
   const handleSearch = async (): Promise<void> => {
     setFilterInfo({ triggerType: "keyword", target: searchQuery });
   };
@@ -27,6 +29,7 @@ export default function Header() {
   const logout = () => {
     localStorage.removeItem("token");
     setIsLogin(false);
+    navigate("/");
   };
 
   return (
