@@ -17,6 +17,7 @@ export type UrlMemo = {
   isPinned: boolean;
   tags: Tag[];
   createAt: string;
+  content: string;
 };
 
 type OpenGraph = {

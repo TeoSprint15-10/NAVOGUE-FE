@@ -11,6 +11,8 @@ const Sidebar = () => {
   const onClickBtn = (info: any) => {
     setFilterInfo({ triggerType: "tag", target: info });
   };
+  console.log(tagList);
+
   return (
     <S.Container>
       {tagList.map((e: any, idx: number) => (
