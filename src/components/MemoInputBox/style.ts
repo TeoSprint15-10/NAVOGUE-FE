@@ -4,7 +4,7 @@ const Container = styled.div`
   position: relative;
   width: 80%;
   border: 3px solid #a0c9a2;
-  height: 200px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -15,7 +15,7 @@ const Container = styled.div`
 `;
 
 const TextArea = styled.textarea`
-  height: 65%;
+  height: 150px;
   border: none;
   padding: 10px;
   border: none;
