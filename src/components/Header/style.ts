@@ -41,10 +41,13 @@ export const Logo = styled.div`
 `;
 
 export const LogoImg = styled.img`
+  cursor: pointer;
   margin-right: 10px;
 `;
 
-export const LogoTextImg = styled.img``;
+export const LogoTextImg = styled.img`
+  cursor: pointer;
+`;
 
 export const SearchInput = styled.input`
   width: 60%;

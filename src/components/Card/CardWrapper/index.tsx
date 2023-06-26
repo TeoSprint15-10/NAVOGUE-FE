@@ -25,9 +25,17 @@ interface CardWrapperProps {
 
 export default function CardWrapper({ card }: CardWrapperProps) {
   const { modalOpen, openModal, closeModal } = useModal();
-  const { modalOpen: isOpened, openModal: handleModalOpen, closeModal: handleModalClose } = useModal();
+  const {
+    modalOpen: isOpened,
+    openModal: handleModalOpen,
+    closeModal: handleModalClose,
+  } = useModal();
   const [showDeleteButton, setShowDeleteButton] = useState(false);
-  const { value: content, onChange: onContentChange, setValue } = useInput(card.content);
+  const {
+    value: content,
+    onChange: onContentChange,
+    setValue,
+  } = useInput(card.content);
   console.log(content);
   useEffect(() => {
     setValue(card.content);
@@ -104,7 +112,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
             <Button type="TAG" text={"완료"} onClick={handleModify} />
           </S.ButtonWrapper>
         ) : (
-          <Dot onClick={handleDotClick} />
+          <Dot style={{ cursor: "pointer" }} onClick={handleDotClick} />
         )}
       </S.MenuWrapper>
       {showDeleteButton ? (
@@ -113,9 +121,16 @@ export default function CardWrapper({ card }: CardWrapperProps) {
         <>
           {card && isTextMemo(card) && (
             <>
-              <S.TextMemoContentWrapper onClick={openModal}>{card.content}</S.TextMemoContentWrapper>
+              <S.TextMemoContentWrapper onClick={openModal}>
+                {card.content}
+              </S.TextMemoContentWrapper>
               <ModalPortal>
-                <SelectedContentModal open={modalOpen} close={closeModal} header="전체보기" card={card} />
+                <SelectedContentModal
+                  open={modalOpen}
+                  close={closeModal}
+                  header="전체보기"
+                  card={card}
+                />
               </ModalPortal>
             </>
           )}
@@ -131,9 +146,12 @@ export default function CardWrapper({ card }: CardWrapperProps) {
           {card.tags.map((tag, idx) => (
             <S.TagDeleteBtnWrapper>
               <Button type="TAG" text={tag} key={idx} />
-              {showDeleteButton && <S.DeleteBtn onClick={() => handleTagDelete(card.id + "", tag)} />}
+              {showDeleteButton && (
+                <S.DeleteBtn
+                  onClick={() => handleTagDelete(card.id + "", tag)}
+                />
+              )}
             </S.TagDeleteBtnWrapper>
-
           ))}
         </S.TagsBtnWrapper>
         <S.TagAddBtnWrapper>
