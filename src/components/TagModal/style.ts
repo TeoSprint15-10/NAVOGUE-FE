@@ -2,25 +2,31 @@ import styled from "styled-components";
 
 export const Overlay = styled.div`
   position: fixed;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   opacity: 1;
   z-index: 16;
   background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+
 export const Wrapper = styled.div`
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 300px;
   height: 400px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  margin: auto;
   border: 5px solid #a0c9a2;
   border-radius: 30px;
   background-color: #ffffff;

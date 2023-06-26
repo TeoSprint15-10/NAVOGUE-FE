@@ -32,7 +32,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
     closeModal: handleModalClose,
   } = useModal();
   const [showDeleteButton, setShowDeleteButton] = useState(false);
-  const { value: content, onChange: onContentChange} = useInput(card.content);
+  const { value: content, onChange: onContentChange } = useInput(card.content);
   console.log(content);
 
   // queryClient logic
