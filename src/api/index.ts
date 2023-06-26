@@ -8,7 +8,7 @@ const axiosInstance = Axios.create({
 });
 
 const token = localStorage.getItem("token") || "";
-
+console.log(token);
 const axiosWithAccessToken = Axios.create({
   baseURL: BASE_URL,
   headers: {
