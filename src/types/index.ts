@@ -5,7 +5,7 @@ export type TextMemo = {
   id: number;
   contentType: TextContentType;
   content: string;
-  isPinned: boolean;
+  pinned: boolean;
   tags: Tag[];
   createAt: string;
 };
@@ -14,9 +14,10 @@ export type UrlMemo = {
   id: number;
   contentType: UrlContentType;
   openGraph: OpenGraph;
-  isPinned: boolean;
+  pinned: boolean;
   tags: Tag[];
   createAt: string;
+  content: string;
 };
 
 type OpenGraph = {
