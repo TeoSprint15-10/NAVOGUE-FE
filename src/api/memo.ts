@@ -1,5 +1,4 @@
 import { axiosWithAccessToken } from "./";
-import { TextMemo } from "../types";
 import { MemoListResponse } from "../types/responseType";
 
 interface IPostMemo {
@@ -16,11 +15,11 @@ const getMemoSearchedList = async (
   type?: string,
   value?: string
 ) => {
-  const response = await axiosWithAccessToken.get<TextMemo[]>(
+  const response = await axiosWithAccessToken.get<MemoListResponse>(
     `/memo?page=${page}`,
     {
       params: {
-        [type!]: value,
+        [type || ""]: value,
       },
     }
   );
@@ -54,7 +53,7 @@ const deleteMemo = async (id: number) => {
 };
 
 const modifyMemo = async (modifyData: ModifyMemo) => {
-  const response = await axiosWithAccessToken.patch("/memo",modifyData);
+  const response = await axiosWithAccessToken.patch("/memo", modifyData);
   console.log(response);
   return response.data;
 };

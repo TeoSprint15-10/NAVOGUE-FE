@@ -6,11 +6,11 @@ interface CardListProps {
   cardList: (TextMemo | UrlMemo)[] | undefined;
 }
 
-export default function CardList({ cardList }: any) {
+export default function CardList({ cardList }: CardListProps) {
   console.log(cardList);
   return (
     <S.CardListWrapper>
-      {cardList?.content!.map((card: any, idx: number) => (
+      {cardList?.map((card, idx: number) => (
         <CardWrapper key={idx} card={card}></CardWrapper>
       ))}
     </S.CardListWrapper>
