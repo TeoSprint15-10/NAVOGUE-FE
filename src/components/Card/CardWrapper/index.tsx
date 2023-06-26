@@ -20,7 +20,6 @@ import { modifyMemo } from "../../../api/memo";
 import TagModal from "../../TagModal";
 import { useTogglePinMemo } from "../../../hooks/useTogglePinMemo";
 
-
 interface CardWrapperProps {
   card: TextMemo | UrlMemo;
 }
@@ -32,20 +31,22 @@ export default function CardWrapper({ card }: CardWrapperProps) {
     openModal: handleModalOpen,
     closeModal: handleModalClose,
   } = useModal();
+  const [showDeleteButton, setShowDeleteButton] = useState(false);
+  const { value: content, onChange: onContentChange} = useInput(card.content);
+  console.log(content);
 
-
+  // queryClient logic
   const queryClient = useQueryClient();
-
   const { mutate: del } = useMutation(deleteMemo, {
     onSuccess: (data) => {
       queryClient.invalidateQueries([QUERY_KEY.MEMO_LIST]);
       console.log(data);
-
     },
     onError: (data) => {
       console.log(data);
     },
   });
+
   const { mutate: modify } = useMutation(modifyMemo, {
     onSuccess: (data) => {
       queryClient.invalidateQueries([QUERY_KEY.MEMO_LIST]);
@@ -55,42 +56,21 @@ export default function CardWrapper({ card }: CardWrapperProps) {
       console.log(data);
     },
   });
-  const [showDeleteButton, setShowDeleteButton] = useState(false);
-  const { value: content, onChange: onContentChange, setValue } = useInput();
-  console.log(content);
-  
+  // 수정 버튼 click event
   const handleDotClick = () => {
     setShowDeleteButton(true);
     onContentChange({ target: { value: card.content } });
   };
-
-const handleModify = () => {
-  const { value, onChange, setValue } = useInput(card.content);
-
-  // 메모 삭제시 state 갱신
-  useEffect(() => {
-    setValue(card.content);
-  }, [card]);
-  const handleDotClick = () => {
-    setShowDeleteButton(true);
-    //onContentChange({ target: { value: card.content } });
-  };
-
+  // 수정완료 버튼 click event
   const handleModify = () => {
-    modifyMemo({ content, id: card.id });
-  };
-
-  // 메모 삭제
-  const handleDelete = (id: number) => {
-    del(id);
     setShowDeleteButton(false);
     modify({ content, id: card.id });
   };
 
+  // 메모 삭제 버튼 click event
   const handleDelete = () => {
     console.log(card.id);
     setShowDeleteButton(false);
-
     del(card.id);
     console.log("hello");
   };
@@ -117,11 +97,6 @@ const handleModify = () => {
       </S.MenuWrapper>
       {showDeleteButton ? (
         <S.ModifyTextArea value={content} onChange={onContentChange} />
-        <S.ModifyTextArea
-          value={value}
-          onChange={handleChange}
-          placeholder={"대기"}
-        />
       ) : (
         <>
           {card && isTextMemo(card) && (
