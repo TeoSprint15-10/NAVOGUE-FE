@@ -67,7 +67,7 @@ NA:VOGUE: 는 태그별로 정리되어 쉽게 찾아볼 수 있도록 돕습니
 <img src="https://img.shields.io/badge/spring rest docs-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
 
 
-**Language |** Java 11
+**Language |** Java 17
 
 **Framework |** Spring 5.3.21 (Spring Boot 2.7.1, Spring MVC 5.3.21)
 
