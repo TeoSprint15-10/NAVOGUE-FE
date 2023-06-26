@@ -8,7 +8,7 @@ const KakaoCallback = () => {
     // const redirect_uri = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
     const params = new URL(document.location.toString()).searchParams;
     const code = params.get("code");
-    const BASE_URL = "http://courtney.reverof.p-e.kr:8080";
+    const BASE_URL = "https://courtney.reverof.p-e.kr:8443";
 
     axios
       .get(`${BASE_URL}/user/login?code=${code}`)
@@ -22,10 +22,6 @@ const KakaoCallback = () => {
         console.error("API 요청 에러", error.response);
       });
   }, []);
-
-  const removeToken = () => {
-    localStorage.removeItem("token");
-  };
 
   return (
     <>

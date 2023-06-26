@@ -1,10 +1,17 @@
 import { createMemo } from "../api/memo";
-import { useMutation } from "@tanstack/react-query";
-import isValidUrl from "../util/isValidUrl";
+
+import isValidUrl from "../utils/isValidUrl";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { QUERY_KEY } from "../constants/key";
+
 
 const useCreateMemo = () => {
+  const queryClient = useQueryClient();
   const { mutate: post } = useMutation(createMemo, {
-    onSuccess: (data) => console.log(data),
+    onSuccess: (data) => {
+      console.log(data);
+      queryClient.invalidateQueries([QUERY_KEY.MEMO_LIST]);
+    },
     onError: (err) => console.log(err),
   });
 

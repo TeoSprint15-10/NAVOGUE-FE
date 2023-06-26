@@ -4,7 +4,7 @@ import useInput from "../../hooks/useInput";
 import useCreateMemo from "../../hooks/useCreateMemo";
 
 export default function MemoInputBox() {
-  const { value, onChange, setValue } = useInput();
+  const { value, onChange, setValue } = useInput("");
   const { postMemo } = useCreateMemo();
 
   const onClickBtn = () => {

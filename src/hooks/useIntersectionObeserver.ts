@@ -3,12 +3,14 @@ import { InfiniteQueryObserverResult } from "@tanstack/react-query";
 
 interface useIntersectionObserverProps {
   threshold?: number;
+  isFetching: boolean;
   hasNextPage: boolean | undefined;
   fetchNextPage: () => Promise<InfiniteQueryObserverResult>;
 }
 
 export const useIntersectionObserver = ({
-  threshold = 0.7,
+  threshold = 0.5,
+  isFetching,
   hasNextPage,
   fetchNextPage,
 }: useIntersectionObserverProps) => {
@@ -23,18 +25,16 @@ export const useIntersectionObserver = ({
   };
 
   useEffect(() => {
-    const target = targetRef.current;
-
-    if (!target) return;
+    if (isFetching || !targetRef.current) return;
 
     const observer = new IntersectionObserver(observerCallback, {
       threshold,
     });
 
-    observer.observe(target);
+    observer.observe(targetRef.current);
 
-    return () => observer.unobserve(target);
-  }, [targetRef.current]);
+    return () => observer.disconnect();
+  }, [targetRef.current, isFetching]);
 
   return { targetRef };
 };

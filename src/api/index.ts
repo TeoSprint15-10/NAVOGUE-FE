@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-const BASE_URL = "http://courtney.reverof.p-e.kr:8080";
+const BASE_URL = "https://courtney.reverof.p-e.kr:8443";
 
 const axiosInstance = Axios.create({
   baseURL: BASE_URL,
@@ -11,7 +11,7 @@ const axiosWithAccessToken = Axios.create({
   baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
-    "Access-Token": import.meta.env.VITE_APP_ACCESS_TOKEN,
+    "Access-Token": localStorage.getItem("token"),
   },
 });
 

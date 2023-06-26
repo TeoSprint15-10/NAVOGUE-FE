@@ -1,18 +1,23 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./style";
 import Button from "../Button";
-import { MemoTagListData } from "../../types";
 import { createTags } from "../../api/tag";
+import { filterDuplicateElements } from "../../utils/filterDuplicateElements";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { QUERY_KEY } from "../../constants/key";
+interface TagModalProps {
+  memoId: string;
+  tagNames: string[];
+  isOpened: boolean;
+  handleModalClose: () => void;
+}
 
-export default function TagModal({ memoId, tagNames }: MemoTagListData) {
+export default function TagModal({ memoId, tagNames, isOpened, handleModalClose }: TagModalProps) {
+  const queryClient = useQueryClient();
+  const filteredTags = filterDuplicateElements(tagNames);
   const [inputValue, setInputValue] = useState("");
-  const [tags, setTags] = useState(tagNames);
-  const [isOpen, setIsOpen] = useState(true);
+  const [tags, setTags] = useState(filteredTags);
   const [isDuplicateTag, setIsDuplicateTag] = useState(false);
-
-  useEffect(() => {
-    setTags(tagNames);
-  }, [tagNames]);
 
   useEffect(() => {
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -24,6 +29,19 @@ export default function TagModal({ memoId, tagNames }: MemoTagListData) {
       document.body.style.paddingRight = "";
     };
   }, []);
+
+  const { mutate: create } = useMutation(createTags, {
+    onSuccess: (data) => {
+      queryClient.invalidateQueries([QUERY_KEY.TAG_LIST]);
+      queryClient.invalidateQueries([QUERY_KEY.MEMO_LIST]);
+
+      console.log(data);
+    },
+    onError: (data) => {
+      console.log(data);
+    },
+  });
+  // 수정 버튼
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(e.target.value);
@@ -38,23 +56,36 @@ export default function TagModal({ memoId, tagNames }: MemoTagListData) {
       return;
     }
     const updatedTagNames = [...tags, trimmedValue];
-    setTags(updatedTagNames);
+    setTags(filterDuplicateElements(updatedTagNames));
     setInputValue("");
   };
 
   const handleSaveTags = async (): Promise<void> => {
-    await createTags({ memoId, tagNames: tags });
+    const newTags = tags.filter((tag) => !tagNames.includes(tag));
+    if (newTags.length === 0) {
+      return;
+    }
+    await create({ memoId, tagNames: newTags });
     setInputValue("");
+    setIsDuplicateTag(false);
+    handleModalClose();
   };
 
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
+  // const handleSaveTags = async (): Promise<void> => {
+  //   const newTags = tags.filter((tag) => !tagNames.includes(tag));
+  //   if (newTags.length === 0) {
+  //     return;
+  //   }
+  //   await createTags({ memoId, tagNames: newTags });
+  //   setInputValue("");
+  //   setIsDuplicateTag(false);
+  //   handleModalClose();
+  // };
 
   return (
     <>
-      {isOpen && <S.Overlay onClick={handleCloseModal} />}
-      {isOpen && (
+      {isOpened && <S.Overlay onClick={handleModalClose} />}
+      {isOpened && (
         <S.Wrapper style={{ top: scrollY + 100 }}>
           <S.ModalInputWrapper>
             <S.ModalTitle>태그 추가</S.ModalTitle>
