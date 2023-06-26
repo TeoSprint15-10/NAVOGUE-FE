@@ -1,17 +1,20 @@
 import * as S from "./style";
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import searchIconUrl from "/assets/searchIcon.png";
 import logoImgUrl from "../../../public/assets/logo.svg";
 import logoTextImgUrl from "/assets/NAVOGUE.png";
 import { getMemoSearchedList } from "../../api/memo";
 import { MemoContext } from "../../context/MemoContext";
+import LogoImageUrl from "../../../public/assets/LoginLogo.png";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { filterState } from "../../recoil/atoms/filterState";
-import LogoImageUrl from "../../../public/assets/LoginLogo.png";
+import { loginState } from "../../recoil/atoms/loginState";
 
 export default function Header() {
   const [filterInfo, setFilterInfo] = useRecoilState(filterState);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isLogin, setIsLogin] = useRecoilState(loginState);
 
   const handleSearch = async (): Promise<void> => {
     setFilterInfo({ triggerType: "keyword", target: searchQuery });
@@ -21,9 +24,14 @@ export default function Header() {
     setSearchQuery(event.target.value);
   };
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    setIsLogin(false);
+  };
+
   return (
     <S.Wrapper>
-      <S.loginImg src={LogoImageUrl} alt="LogoImageUrl"></S.loginImg>
+      <S.loginImg src={LogoImageUrl} alt="LogoImageUrl" onClick={logout} />
       <S.Overlay />
       <S.Box>
         <S.Logo>
