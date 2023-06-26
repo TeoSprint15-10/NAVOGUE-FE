@@ -11,7 +11,6 @@ export const Container = styled.li`
   padding: 10px;
   margin-right: 50px;
   margin-bottom: 50px;
-  overflow-y: hidden;
 `;
 
 export const ButtonWrapper = styled.div`

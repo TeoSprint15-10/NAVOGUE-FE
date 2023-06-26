@@ -1,6 +1,6 @@
 import { createMemo } from "../api/memo";
 import { useMutation } from "@tanstack/react-query";
-import isValidUrl from "../util/isValidUrl";
+import isValidUrl from "../utils/isValidUrl";
 
 const useCreateMemo = () => {
   const { mutate: post } = useMutation(createMemo, {

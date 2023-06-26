@@ -17,6 +17,7 @@ import { QUERY_KEY } from "../../../constants/key";
 import { useState } from "react";
 import useInput from "../../../hooks/useInput";
 import { modifyMemo } from "../../../api/memo";
+import TagModal from "../../TagModal";
 
 interface CardWrapperProps {
   card: TextMemo | UrlMemo;
@@ -24,6 +25,12 @@ interface CardWrapperProps {
 
 export default function CardWrapper({ card }: CardWrapperProps) {
   const { modalOpen, openModal, closeModal } = useModal();
+  const {
+    modalOpen: isOpened,
+    openModal: handleModalOpen,
+    closeModal: handleModalClose,
+  } = useModal();
+
   const queryClient = useQueryClient();
   const { mutate: del } = useMutation(deleteMemo, {
     onSuccess: (data) => {
@@ -40,7 +47,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
 
   const handleDotClick = () => {
     setShowDeleteButton(true);
-    onContentChange({ target: { value: card.content } });
+    //onContentChange({ target: { value: card.content } });
   };
   const handleModify = () => {
     modifyMemo({ content, id: card.id });
@@ -102,8 +109,16 @@ export default function CardWrapper({ card }: CardWrapperProps) {
         </S.TagsBtnWrapper>
         <S.ModifyBtnWrapper2>
           <Button type="TAG_ADD" text={"…"} />
-          {showDeleteButton && <S.AddTagBtn />}
+          {showDeleteButton && <S.AddTagBtn onClick={handleModalOpen} />}
         </S.ModifyBtnWrapper2>
+        <ModalPortal>
+          <TagModal
+            memoId={card.id + ""}
+            tagNames={card.tags}
+            isOpened={isOpened}
+            handleModalClose={handleModalClose}
+          ></TagModal>
+        </ModalPortal>
       </S.TagWrapper>
     </S.Container>
   );
