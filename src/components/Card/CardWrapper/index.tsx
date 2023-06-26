@@ -12,7 +12,7 @@ import { isTextMemo, isUrlMemo } from "../../../utils/memoTypeGuard";
 import { deleteMemo } from "../../../api/memo";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { QUERY_KEY } from "../../../constants/key";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useInput from "../../../hooks/useInput";
 import { modifyMemo } from "../../../api/memo";
 import TagModal from "../../TagModal";
@@ -25,20 +25,20 @@ interface CardWrapperProps {
 
 export default function CardWrapper({ card }: CardWrapperProps) {
   const { modalOpen, openModal, closeModal } = useModal();
-  const {
-    modalOpen: isOpened,
-    openModal: handleModalOpen,
-    closeModal: handleModalClose,
-  } = useModal();
+  const { modalOpen: isOpened, openModal: handleModalOpen, closeModal: handleModalClose } = useModal();
   const [showDeleteButton, setShowDeleteButton] = useState(false);
-  const { value: content, onChange: onContentChange } = useInput(card.content);
+  const { value: content, onChange: onContentChange, setValue } = useInput(card.content);
   console.log(content);
+  useEffect(() => {
+    setValue(card.content);
+  }, [card]);
 
   // queryClient logic
   const queryClient = useQueryClient();
   const { mutate: del } = useMutation(deleteMemo, {
     onSuccess: (data) => {
       queryClient.invalidateQueries([QUERY_KEY.MEMO_LIST]);
+      queryClient.invalidateQueries([QUERY_KEY.TAG_LIST]);
       console.log(data);
     },
     onError: (data) => {
@@ -114,16 +114,9 @@ export default function CardWrapper({ card }: CardWrapperProps) {
         <>
           {card && isTextMemo(card) && (
             <>
-              <S.TextMemoContentWrapper onClick={openModal}>
-                {card.content}
-              </S.TextMemoContentWrapper>
+              <S.TextMemoContentWrapper onClick={openModal}>{card.content}</S.TextMemoContentWrapper>
               <ModalPortal>
-                <SelectedContentModal
-                  open={modalOpen}
-                  close={closeModal}
-                  header="전체보기"
-                  card={card}
-                />
+                <SelectedContentModal open={modalOpen} close={closeModal} header="전체보기" card={card} />
               </ModalPortal>
             </>
           )}
@@ -137,20 +130,16 @@ export default function CardWrapper({ card }: CardWrapperProps) {
       <S.TagWrapper>
         <S.TagsBtnWrapper>
           {card.tags.map((tag, idx) => (
-            <S.ModifyBtnWrapper1>
+            <S.TagDeleteBtnWrapper>
               <Button type="TAG" text={tag} key={idx} />
-              {showDeleteButton && (
-                <S.DeleteBtn
-                  onClick={() => handleTagDelete(card.id + "", tag)}
-                />
-              )}
-            </S.ModifyBtnWrapper1>
+              {showDeleteButton && <S.DeleteBtn onClick={() => handleTagDelete(card.id + "", tag)} />}
+            </S.TagDeleteBtnWrapper>
           ))}
         </S.TagsBtnWrapper>
-        <S.ModifyBtnWrapper2>
+        <S.TagAddBtnWrapper>
           <Button type="TAG_ADD" text={"…"} onClick={handleModalOpen} />
-          {showDeleteButton && <S.AddTagBtn />}
-        </S.ModifyBtnWrapper2>
+          {/* {showDeleteButton && <S.AddTagBtn />} */}
+        </S.TagAddBtnWrapper>
         <ModalPortal>
           <TagModal
             memoId={card.id + ""}

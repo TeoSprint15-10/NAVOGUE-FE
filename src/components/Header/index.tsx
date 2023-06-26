@@ -4,7 +4,6 @@ import searchIconUrl from "/assets/searchIcon.png";
 import logoImgUrl from "../../../public/assets/logo.svg";
 import logoTextImgUrl from "/assets/NAVOGUE.png";
 import { getMemoSearchedList } from "../../api/memo";
-import { MemoContext } from "../../context/MemoContext";
 import LogoImageUrl from "../../../public/assets/LoginLogo.png";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";

@@ -50,28 +50,30 @@ export const TagsBtnWrapper = styled.div`
   gap: 10px;
   width: 100%;
   height: 50px;
-  /* padding: 10px 0; */
-  /* box-sizing: border-box;
-  &::-webkit-scrollbar {
+  box-sizing: border-box;
+  /* &::-webkit-scrollbar {
     display: none;
   } */
 `;
 
-export const ModifyBtnWrapper1 = styled.div`
+export const TagDeleteBtnWrapper = styled.div`
   position: relative;
   gap: 10px;
   :first-child {
     cursor: default;
   }
+  padding-top: 2px;
 `;
 
-export const ModifyBtnWrapper2 = styled.div`
+export const TagAddBtnWrapper = styled.div`
   position: absolute;
+  top: 0;
   right: 0;
   gap: 10px;
-  /* border: 1px solid green; */
+  border-radius: 50%;
+  cursor: pointer;
   :first-child {
-    cursor: default;
+    cursor: pointer;
   }
 `;
 
@@ -85,25 +87,25 @@ export const DeleteBtn = styled.button`
   width: 15px;
   height: 15px;
   right: 0;
-  top: -5px;
+  top: 0;
   padding: 0;
   cursor: pointer;
 `;
 
-export const AddTagBtn = styled.button`
-  position: absolute;
-  border-radius: 50%;
-  border-style: none;
-  background-image: url(${addTagButton});
-  background-size: contain;
-  background-color: #ffff;
-  width: 15px;
-  height: 15px;
-  right: 0;
-  top: -5px;
-  padding: 0;
-  cursor: pointer;
-`;
+// export const AddTagBtn = styled.button`
+//   position: absolute;
+//   border-radius: 50%;
+//   border-style: none;
+//   background-image: url(${addTagButton});
+//   background-size: contain;
+//   background-color: #ffff;
+//   width: 15px;
+//   height: 15px;
+//   right: 0;
+//   top: -5px;
+//   padding: 0;
+//   cursor: pointer;
+// `;
 
 export const MenuWrapper = styled.div`
   display: flex;
