@@ -14,20 +14,13 @@ import { useIntersectionObserver } from "../../hooks/useIntersectionObeserver";
 export default function MainPage() {
   const [filterInfo, setFilterInfo] = useRecoilState(filterState);
 
-  const { data, fetchNextPage, refetch, isLoading, isFetching } =
-    useInfiniteQuery({
-      queryKey: [QUERY_KEY.MEMO_LIST],
-      queryFn: ({ pageParam = 0 }) =>
-        getMemoSearchedList(
-          pageParam,
-          filterInfo.triggerType,
-          filterInfo.target
-        ),
-      getNextPageParam: (lastPage) =>
-        lastPage.last ? undefined : lastPage.pageable.pageNumber + 1,
+  const { data, fetchNextPage, refetch, isLoading, isFetching } = useInfiniteQuery({
+    queryKey: [QUERY_KEY.MEMO_LIST],
+    queryFn: ({ pageParam = 0 }) => getMemoSearchedList(pageParam, filterInfo.triggerType, filterInfo.target),
+    getNextPageParam: (lastPage) => (lastPage.last ? undefined : lastPage.pageable.pageNumber + 1),
 
-      refetchOnWindowFocus: false,
-    });
+    refetchOnWindowFocus: false,
+  });
 
   const { targetRef } = useIntersectionObserver({
     isFetching,
@@ -47,9 +40,7 @@ export default function MainPage() {
       <S.MainContent>
         <MemoInputBox />
         <FilterCheckbox />
-        <CardList
-          cardList={data?.pages.flatMap((page) => page.content)}
-        ></CardList>
+        <CardList cardList={data?.pages.flatMap((page) => page.content)}></CardList>
         <div ref={targetRef}></div>
       </S.MainContent>
     </S.Container>

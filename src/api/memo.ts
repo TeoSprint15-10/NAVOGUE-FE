@@ -10,27 +10,18 @@ interface ModifyMemo {
   id: number;
 }
 
-const getMemoSearchedList = async (
-  page: number,
-  type?: string,
-  value?: string
-) => {
-  const response = await axiosWithAccessToken.get<MemoListResponse>(
-    `/memo?page=${page}`,
-    {
-      params: {
-        [type || ""]: value,
-      },
-    }
-  );
+const getMemoSearchedList = async (page: number, type?: string, value?: string) => {
+  const response = await axiosWithAccessToken.get<MemoListResponse>(`/memo?page=${page}`, {
+    params: {
+      [type || ""]: value,
+    },
+  });
 
   return response.data;
 };
 
 const getMemoList = async (pageParam: number) => {
-  const response = await axiosWithAccessToken.get<MemoListResponse>(
-    `/memo?page=${pageParam}`
-  );
+  const response = await axiosWithAccessToken.get<MemoListResponse>(`/memo?page=${pageParam}`);
 
   return response.data;
 };
@@ -53,7 +44,12 @@ const deleteMemo = async (id: number) => {
 };
 
 const modifyMemo = async (modifyData: ModifyMemo) => {
-  const response = await axiosWithAccessToken.patch("/memo", modifyData);
+  const { content, id } = modifyData;
+  const requestData = JSON.stringify({
+    content,
+    id,
+  });
+  const response = await axiosWithAccessToken.patch("/memo", requestData);
   console.log(response);
   return response.data;
 };
