@@ -12,7 +12,7 @@ const KakaoCallback = () => {
       .then((res) => {
         console.log(res.data.accessToken);
         const data = res.data.accessToken;
-        localStorage.setItem("token", JSON.stringify(data));
+        localStorage.setItem("token", data);
         window.location.href =
           "https://main--gleeful-kulfi-17f59b.netlify.app/oauth";
       })
