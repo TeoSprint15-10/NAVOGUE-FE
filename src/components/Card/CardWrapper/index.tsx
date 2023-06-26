@@ -38,6 +38,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
   const { mutate: del } = useMutation(deleteMemo, {
     onSuccess: (data) => {
       queryClient.invalidateQueries([QUERY_KEY.MEMO_LIST]);
+      queryClient.invalidateQueries([QUERY_KEY.TAG_LIST]);
       console.log(data);
     },
     onError: (data) => {
@@ -133,7 +134,6 @@ export default function CardWrapper({ card }: CardWrapperProps) {
               <Button type="TAG" text={tag} key={idx} />
               {showDeleteButton && <S.DeleteBtn onClick={() => handleTagDelete(card.id + "", tag)} />}
             </S.TagDeleteBtnWrapper>
-
           ))}
         </S.TagsBtnWrapper>
         <S.TagAddBtnWrapper>
