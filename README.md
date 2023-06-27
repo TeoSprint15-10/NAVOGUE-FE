@@ -99,31 +99,49 @@ NA:VOGUE: 는 태그별로 정리되어 쉽게 찾아볼 수 있도록 돕습니
 ## 1. 간편 카카오 로그인
     카카오 로그인으로 쉽게 로그인할 수 있어요
 
-
 <br>
 
 ## 2. 한 눈에 보이는 나의 메모
     카드 형식으로 한 눈에 나의 메모를 확인할 수 있어요
+    
+<img width="700" alt="image" src="https://github.com/TeoSprint15-10/NAVOGUE-FE/assets/89332492/8f4bb67f-54ff-44e7-8b0f-d9e6e425cd39">
 <br>
 
 ## 3. 원클릭으로 메모와 분류를 동시에
     메인페이지에서 메모를 등록만 하면 NA:VOGUE가 분류해드려요
+
+<img width="700" alt="image" src="https://github.com/TeoSprint15-10/NAVOGUE-FE/assets/89332492/61fd0b94-a154-44cd-b299-3fb3414ecf2e">
 <br>
 
 ## 4. 텍스트, URL 모두 분류 가능
     일반 텍스트, URL 상관 없이 분류 가능해요
+### TEXT만 보기
+<img width="700" alt="image" src="https://github.com/TeoSprint15-10/NAVOGUE-FE/assets/89332492/9cbe3bd6-b5a0-4397-bf53-dcaa46fe9d78">
+
+
+### URL만 보기
+<img width="700" alt="image" src="https://github.com/TeoSprint15-10/NAVOGUE-FE/assets/89332492/4dcc8685-55fd-49d2-9f4e-be9c4c9b669b">
 <br>
 
 ## 5. 내 마음대로 태깅
     쉽게 태그를 추가하거나 수정할 수 있어요
+
+<img width="700" alt="image" src="https://github.com/TeoSprint15-10/NAVOGUE-FE/assets/89332492/45c69eeb-3bc7-4668-9c3f-e7f34c39cff0">
 <br>
 
 ## 6. 태그별 메모
     태그별로 메모를 모아볼 수 있어요
+
+<img width="700" alt="image" src="https://github.com/TeoSprint15-10/NAVOGUE-FE/assets/89332492/4dcc8685-55fd-49d2-9f4e-be9c4c9b669b">
 <br>
 
 ## 7. 키워드 검색
     키워드 검색으로 나의 메모를 쉽게 찾을 수 있어요
+
+<img width="700" alt="image" src="https://github.com/TeoSprint15-10/NAVOGUE-FE/assets/89332492/e8ac5e1b-2446-47ca-ba4e-039acb9340da">
+
+<br>
+<br>
     
 ## 우리는 이렇게 작업했어요
 ![](https://github.com/TeoSprint15-10/NAVOGUE-BE/assets/92250144/43817ed1-64c8-4ac4-bf81-5d2f8ba870c1)
