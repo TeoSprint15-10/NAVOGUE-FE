@@ -3,9 +3,6 @@ import axios from "axios";
 
 const KakaoCallback = () => {
   useEffect(() => {
-    // const grant_type = "authorization_code";
-    // const Rest_api_key = import.meta.env.VITE_APP_KAKAO_CLIENT_ID;
-    // const redirect_uri = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
     const params = new URL(document.location.toString()).searchParams;
     const code = params.get("code");
     const BASE_URL = "https://courtney.reverof.p-e.kr:8443";
