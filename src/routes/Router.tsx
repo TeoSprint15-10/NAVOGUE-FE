@@ -9,7 +9,7 @@ import { useRecoilState } from "recoil";
 
 const Router = () => {
   const [isLogin, setIsLogin] = useRecoilState(loginState);
-  console.log(isLogin);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -17,8 +17,10 @@ const Router = () => {
           path={PATH_NAME.LOGIN}
           element={isLogin ? <MainPage /> : <LoginPage />}
         />
-        <Route path={PATH_NAME.MAIN} element={<MainPage />} />
-
+        <Route
+          path={PATH_NAME.MAIN}
+          element={isLogin ? <MainPage /> : <LoginPage />}
+        />
         <Route
           path={PATH_NAME.KAKAOCALLBACK}
           element={isLogin ? <MainPage /> : <KakaoCallback />}

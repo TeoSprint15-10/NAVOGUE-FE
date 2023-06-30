@@ -13,14 +13,6 @@ export const Container = styled.li`
   margin-bottom: 50px;
 `;
 
-export const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  height: 50px;
-  width: 120px;
-`;
-
 export const Content = styled.div`
   width: 100%;
   height: 150px;
@@ -130,6 +122,14 @@ export const TextMemoContentWrapper = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  height: 50px;
+  width: 120px;
 `;
 
 export const UrlMemoContentWrapper = styled.div`
