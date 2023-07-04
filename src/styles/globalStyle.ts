@@ -7,13 +7,14 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     }
     body {
+      overflow: auto !important;
       width: 100vw;
       margin: 0;
       height: 100vh;
     }
     
     #root {
-      height: 100%
+      height: 100vh;
     }
     
     main {

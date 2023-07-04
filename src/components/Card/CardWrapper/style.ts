@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import DeleteMemoButton from "../../../../public/assets/deleteMemoButton.png";
-import addTagButton from "../../../../public/assets/addTagButton.png";
 
 export const Container = styled.li`
   position: relative;

@@ -113,7 +113,7 @@ export default function CardWrapper({ card }: CardWrapperProps) {
             <Button type="TAG" text={"완료"} onClick={handleModify} />
           </S.ButtonWrapper>
         ) : (
-          <Dot onClick={handleDotClick} />
+          <Dot style={{ cursor: "pointer" }} onClick={handleDotClick} />
         )}
       </S.MenuWrapper>
       {showDeleteButton ? (

@@ -3,9 +3,7 @@ import { ChangeEvent, useState } from "react";
 import searchIconUrl from "/assets/searchIcon.png";
 import logoImgUrl from "../../../public/assets/logo.svg";
 import logoTextImgUrl from "/assets/NAVOGUE.png";
-import { getMemoSearchedList } from "../../api/memo";
 import LogoImageUrl from "../../../public/assets/LoginLogo.png";
-import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { filterState } from "../../recoil/atoms/filterState";
 import { loginState } from "../../recoil/atoms/loginState";
@@ -27,6 +25,9 @@ export default function Header() {
     localStorage.removeItem("token");
     setIsLogin(false);
   };
+  const handleLogoClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <S.Wrapper>
@@ -34,8 +35,12 @@ export default function Header() {
       <S.Overlay />
       <S.Box>
         <S.Logo>
-          <S.LogoImg src={logoImgUrl} alt="Logo" />
-          <S.LogoTextImg src={logoTextImgUrl} alt="NAVOGUE" />
+          <S.LogoImg onClick={handleLogoClick} src={logoImgUrl} alt="Logo" />
+          <S.LogoTextImg
+            onClick={handleLogoClick}
+            src={logoTextImgUrl}
+            alt="NAVOGUE"
+          />
         </S.Logo>
         <S.SearchInput value={searchQuery} onChange={handleChange} />
         <S.SearchBtn onClick={handleSearch}>
